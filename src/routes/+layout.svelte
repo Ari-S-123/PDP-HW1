@@ -6,6 +6,7 @@
   import { Button, buttonVariants } from "$lib/components/ui/button/index";
   import { Separator } from "$lib/components/ui/separator/index";
   import { Toaster } from "$lib/components/ui/sonner";
+  import { toast } from "svelte-sonner";
 
   let { children } = $props();
 </script>
@@ -40,13 +41,28 @@
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
           <DropdownMenu.Group>
-            <DropdownMenu.Item class="cursor-pointer" onclick={() => setMode("light")}
+            <DropdownMenu.Item
+              class="cursor-pointer"
+              onclick={() => {
+                setMode("light");
+                toast.warning("🤮");
+              }}
               >Light
             </DropdownMenu.Item>
-            <DropdownMenu.Item class="cursor-pointer" onclick={() => setMode("dark")}
+            <DropdownMenu.Item
+              class="cursor-pointer"
+              onclick={() => {
+                setMode("dark");
+                toast.success("You made the right choice! 🌚");
+              }}
               >Dark
             </DropdownMenu.Item>
-            <DropdownMenu.Item class="cursor-pointer" onclick={() => resetMode()}
+            <DropdownMenu.Item
+              class="cursor-pointer"
+              onclick={() => {
+                resetMode();
+                toast.info("Preferences reset.");
+              }}
               >System
             </DropdownMenu.Item>
           </DropdownMenu.Group>

@@ -5,6 +5,7 @@
   import type IPrompt from "../../solution/interfaces/IPrompt";
   import { getContext } from "svelte";
   import type PromptStorageService from "../../solution/classes/PromptStorageService";
+  import { toast } from "svelte-sonner";
 
   const storageService: PromptStorageService = getContext("storageService");
 
@@ -62,6 +63,9 @@
           onclick={() => {
             storageService.removePromptById(prompt._id);
             prompts = storageService.prompts;
+            toast.success(
+              `Prompt made using ${prompt._model} version ${prompt._version} dated ${new Date(prompt._date).toLocaleDateString()} removed successfully.`
+            );
           }}
           class="m-2"
         >

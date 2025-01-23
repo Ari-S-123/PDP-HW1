@@ -14,6 +14,7 @@
   import { nanoid } from "nanoid";
   import Attachment from "../../solution/classes/Attachment";
   import { Plus } from "lucide-svelte";
+  import { toast } from "svelte-sonner";
 
   const storageService: PromptStorageService = getContext("storageService");
 
@@ -157,6 +158,9 @@
     storageService.addPrompt(newPrompt);
     prompts = storageService.prompts;
     dialogIsOpen = false;
+    toast.success(
+      `Prompt made using ${newPrompt.model} version ${newPrompt.version} dated ${newPrompt.date.toLocaleDateString()} added successfully.`
+    );
   }
 </script>
 
