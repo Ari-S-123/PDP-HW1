@@ -17,7 +17,7 @@ export default class Prompt implements IPrompt {
    * Initializes the prompt.
    * @param {string} model The generative AI model used for this prompt.
    * @param {string} version The version of the model used.
-   * @param {PromptType} type The type of prompt.
+   * @param {string} type The type of prompt.
    * @param {Date} date The date the prompt was created.
    * @param {PromptResult} result The result of the prompt.
    */
@@ -28,6 +28,21 @@ export default class Prompt implements IPrompt {
     date: Date = new Date(),
     result: PromptResult = PromptResult.Success
   ) {
+    if (!model) {
+      throw new Error("Invalid prompt model");
+    }
+    if (!version) {
+      throw new Error("Invalid prompt version");
+    }
+    if (!type) {
+      throw new Error("Invalid prompt type");
+    }
+    if (isNaN(date.getTime())) {
+      throw new Error("Invalid prompt date");
+    }
+    if (!result) {
+      throw new Error("Invalid prompt result");
+    }
     this._model = model;
     this._version = version;
     this._type = type;

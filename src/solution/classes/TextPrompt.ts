@@ -26,6 +26,12 @@ export default class TextPrompt extends Prompt implements ITextPrompt {
     output: string = "Bonjour, le monde!"
   ) {
     super(model, version, type, date, result);
+    if (!input) {
+      throw new Error("Invalid prompt input");
+    }
+    if (!output) {
+      throw new Error("Invalid prompt output");
+    }
     this._input = input;
     this._output = output;
   }

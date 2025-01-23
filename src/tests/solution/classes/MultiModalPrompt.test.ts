@@ -33,6 +33,73 @@ describe("MultiModalPrompt Test Suite", () => {
     expect(defaultMultiModalPrompt.attachments).toStrictEqual([]);
   });
 
+  it("should throw errors for invalid input into constructor", () => {
+    // Invalid prompt should not be possible because of the enum, output can be empty, attachments can be an empty list
+    expect(() => {
+      new MultiModalPrompt(
+        "",
+        "",
+        "",
+        new Date("invalid"),
+        DUMMY_MULTIMODAL_PROMPT_1.result,
+        "",
+        DUMMY_MULTIMODAL_PROMPT_1.output,
+        DUMMY_MULTIMODAL_PROMPT_1.attachments
+      );
+    }).toThrowError("Invalid prompt model");
+    expect(() => {
+      new MultiModalPrompt(
+        "",
+        DUMMY_MULTIMODAL_PROMPT_1.version,
+        DUMMY_MULTIMODAL_PROMPT_1.type,
+        DUMMY_MULTIMODAL_PROMPT_1.date,
+        DUMMY_MULTIMODAL_PROMPT_1.result,
+        DUMMY_MULTIMODAL_PROMPT_1.input,
+        DUMMY_MULTIMODAL_PROMPT_1.output,
+        DUMMY_MULTIMODAL_PROMPT_1.attachments
+      );
+    }).toThrowError("Invalid prompt model");
+
+    expect(() => {
+      new MultiModalPrompt(
+        DUMMY_MULTIMODAL_PROMPT_1.model,
+        "",
+        DUMMY_MULTIMODAL_PROMPT_1.type,
+        DUMMY_MULTIMODAL_PROMPT_1.date,
+        DUMMY_MULTIMODAL_PROMPT_1.result,
+        DUMMY_MULTIMODAL_PROMPT_1.input,
+        DUMMY_MULTIMODAL_PROMPT_1.output,
+        DUMMY_MULTIMODAL_PROMPT_1.attachments
+      );
+    }).toThrowError("Invalid prompt version");
+
+    expect(() => {
+      new MultiModalPrompt(
+        DUMMY_MULTIMODAL_PROMPT_1.model,
+        DUMMY_MULTIMODAL_PROMPT_1.version,
+        DUMMY_MULTIMODAL_PROMPT_1.type,
+        new Date("invalid"),
+        DUMMY_MULTIMODAL_PROMPT_1.result,
+        DUMMY_MULTIMODAL_PROMPT_1.input,
+        DUMMY_MULTIMODAL_PROMPT_1.output,
+        DUMMY_MULTIMODAL_PROMPT_1.attachments
+      );
+    }).toThrowError("Invalid prompt date");
+
+    expect(() => {
+      new MultiModalPrompt(
+        DUMMY_MULTIMODAL_PROMPT_1.model,
+        DUMMY_MULTIMODAL_PROMPT_1.version,
+        DUMMY_MULTIMODAL_PROMPT_1.type,
+        DUMMY_MULTIMODAL_PROMPT_1.date,
+        DUMMY_MULTIMODAL_PROMPT_1.result,
+        "",
+        DUMMY_MULTIMODAL_PROMPT_1.output,
+        DUMMY_MULTIMODAL_PROMPT_1.attachments
+      );
+    }).toThrowError("Invalid prompt input");
+  });
+
   it("should return correct values for getters", () => {
     expect(testMultiModalPrompt.date).toBeInstanceOf(Date);
     expect(testMultiModalPrompt.id).toBeTruthy();

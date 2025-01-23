@@ -6,6 +6,7 @@ import { browser } from "$app/environment";
 
 /**
  * A service for managing prompts. Uses local storage to persist data.
+ * I didn't write the tests for this class because I would have to mock the localStorage API.
  */
 export default class PromptStorageService implements IPromptManager {
   protected _prompts: IPrompt[] = [];

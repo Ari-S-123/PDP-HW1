@@ -13,6 +13,12 @@ export default class Attachment implements IAttachment {
    * @param {string} payload The payload of the attachment.
    */
   public constructor(type: string, payload: string) {
+    if (!type) {
+      throw new Error("Type cannot be null or empty.");
+    }
+    if (!payload) {
+      throw new Error("Payload cannot be null or empty.");
+    }
     this._type = type;
     this._payload = payload;
   }

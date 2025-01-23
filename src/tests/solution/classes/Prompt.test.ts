@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { DUMMY_PROMPT_1 } from "../../test-dummies/prompts";
 import Prompt from "../../../solution/classes/Prompt";
 import { PromptResult } from "../../../solution/enums";
@@ -14,6 +14,42 @@ describe("Prompt Test Suite", () => {
       DUMMY_PROMPT_1.date,
       DUMMY_PROMPT_1.result
     );
+  });
+
+  it("should throw errors for invalid input into constructor", () => {
+    // Invalid prompt should not be possible because of the enum
+    expect(() => {
+      new Prompt("", "", "", new Date("invalid"), DUMMY_PROMPT_1.result);
+    }).toThrowError("Invalid prompt model");
+    expect(() => {
+      new Prompt(
+        "",
+        DUMMY_PROMPT_1.version,
+        DUMMY_PROMPT_1.type,
+        DUMMY_PROMPT_1.date,
+        DUMMY_PROMPT_1.result
+      );
+    }).toThrowError("Invalid prompt model");
+
+    expect(() => {
+      new Prompt(
+        DUMMY_PROMPT_1.model,
+        "",
+        DUMMY_PROMPT_1.type,
+        DUMMY_PROMPT_1.date,
+        DUMMY_PROMPT_1.result
+      );
+    }).toThrowError("Invalid prompt version");
+
+    expect(() => {
+      new Prompt(
+        DUMMY_PROMPT_1.model,
+        DUMMY_PROMPT_1.version,
+        DUMMY_PROMPT_1.type,
+        new Date("invalid"),
+        DUMMY_PROMPT_1.result
+      );
+    }).toThrowError("Invalid prompt date");
   });
 
   it("should create a Prompt instance with default values", () => {

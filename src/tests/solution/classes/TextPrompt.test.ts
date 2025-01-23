@@ -29,6 +29,68 @@ describe("TextPrompt Test Suite", () => {
     expect(defaultTextPrompt.output).toBe("Bonjour, le monde!");
   });
 
+  it("should throw errors for invalid input into constructor", () => {
+    // Invalid prompt should not be possible because of the enum, output can be empty
+    expect(() => {
+      new TextPrompt(
+        "",
+        "",
+        "",
+        new Date("invalid"),
+        DUMMY_TEXT_PROMPT_1.result,
+        "",
+        DUMMY_TEXT_PROMPT_1.output
+      );
+    }).toThrowError("Invalid prompt model");
+    expect(() => {
+      new TextPrompt(
+        "",
+        DUMMY_TEXT_PROMPT_1.version,
+        DUMMY_TEXT_PROMPT_1.type,
+        DUMMY_TEXT_PROMPT_1.date,
+        DUMMY_TEXT_PROMPT_1.result,
+        DUMMY_TEXT_PROMPT_1.input,
+        DUMMY_TEXT_PROMPT_1.output
+      );
+    }).toThrowError("Invalid prompt model");
+
+    expect(() => {
+      new TextPrompt(
+        DUMMY_TEXT_PROMPT_1.model,
+        "",
+        DUMMY_TEXT_PROMPT_1.type,
+        DUMMY_TEXT_PROMPT_1.date,
+        DUMMY_TEXT_PROMPT_1.result,
+        DUMMY_TEXT_PROMPT_1.input,
+        DUMMY_TEXT_PROMPT_1.output
+      );
+    }).toThrowError("Invalid prompt version");
+
+    expect(() => {
+      new TextPrompt(
+        DUMMY_TEXT_PROMPT_1.model,
+        DUMMY_TEXT_PROMPT_1.version,
+        DUMMY_TEXT_PROMPT_1.type,
+        new Date("invalid"),
+        DUMMY_TEXT_PROMPT_1.result,
+        DUMMY_TEXT_PROMPT_1.input,
+        DUMMY_TEXT_PROMPT_1.output
+      );
+    }).toThrowError("Invalid prompt date");
+
+    expect(() => {
+      new TextPrompt(
+        DUMMY_TEXT_PROMPT_1.model,
+        DUMMY_TEXT_PROMPT_1.version,
+        DUMMY_TEXT_PROMPT_1.type,
+        DUMMY_TEXT_PROMPT_1.date,
+        DUMMY_TEXT_PROMPT_1.result,
+        "",
+        DUMMY_TEXT_PROMPT_1.output
+      );
+    }).toThrowError("Invalid prompt input");
+  });
+
   it("should return correct values for getters", () => {
     expect(testTextPrompt.date).toBeInstanceOf(Date);
     expect(testTextPrompt.id).toBeTruthy();

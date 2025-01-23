@@ -28,6 +28,9 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
     attachments: IAttachment[] = []
   ) {
     super(model, version, type, date, result, input, output);
+    if (!attachments) {
+      throw new Error("Invalid prompt attachments");
+    }
     this._attachments = attachments;
   }
 

@@ -12,6 +12,18 @@ describe("Attachment Test Suite", () => {
     expect(testAttachment.payload).toBe(DUMMY_ATTACHMENT_1.payload);
   });
 
+  it("should throw errors for invalid input into constructor", () => {
+    expect(() => {
+      new Attachment("", "");
+    }).toThrowError("Type cannot be null or empty");
+    expect(() => {
+      new Attachment("", DUMMY_ATTACHMENT_1.payload);
+    }).toThrowError("Type cannot be null or empty");
+    expect(() => {
+      new Attachment(DUMMY_ATTACHMENT_1.type, "");
+    }).toThrowError("Payload cannot be null or empty");
+  });
+
   it("should return correct values for setters", () => {
     expect(testAttachment.type).toBe(DUMMY_ATTACHMENT_1.type);
     expect(testAttachment.payload).toBe(DUMMY_ATTACHMENT_1.payload);
