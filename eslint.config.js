@@ -1,45 +1,31 @@
-import prettier from "eslint-config-prettier";
-import js from "@eslint/js";
-import { includeIgnoreFile } from "@eslint/compat";
 import svelte from "eslint-plugin-svelte";
 import globals from "globals";
-import { fileURLToPath } from "node:url";
 import ts from "typescript-eslint";
-
-const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
 import pluginJs from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
-import stylisticJs from "@stylistic/eslint-plugin-js";
 
 export default ts.config(
-  includeIgnoreFile(gitignorePath),
-  js.configs.recommended,
-  ...ts.configs.recommended,
-  ...svelte.configs["flat/recommended"],
-  prettier,
-  ...svelte.configs["flat/prettier"],
+  pluginJs.configs.recommended,
+  {
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node }
+    }
+  },
   {
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node
-      }
-    }
-  },
-  pluginJs.configs.recommended,
-  eslintConfigPrettier,
-  {
-    files: ["**/*.svelte"],
+      },
 
-    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+
       parserOptions: {
-        parser: ts.parser
+        ecmaFeatures: {
+          jsx: true
+        }
       }
-    }
-  },
-  {
-    plugins: {
-      "@stylistic/js": stylisticJs
     },
     rules: {
       indent: [
@@ -51,9 +37,9 @@ export default ts.config(
       ],
       "linebreak-style": ["error", "unix"],
       quotes: ["error", "double"],
-      semi: ["error", "always"],
+      semi: "off", // ts already handles this
       "no-console": 0,
-      // Just for interfaces
+      // Just for Interface method definitions
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
@@ -63,5 +49,21 @@ export default ts.config(
         }
       ]
     }
+  },
+  ...ts.configs.recommended,
+  ...svelte.configs["flat/recommended"],
+  eslintConfigPrettier,
+  ...svelte.configs["flat/prettier"],
+  {
+    files: ["**/*.svelte"],
+
+    languageOptions: {
+      parserOptions: {
+        parser: ts.parser
+      }
+    }
+  },
+  {
+    ignores: ["build/", ".svelte-kit/", "dist/"]
   }
 );
