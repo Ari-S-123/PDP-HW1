@@ -19,7 +19,7 @@ overwritten very easily.
 
 2. Make sure you are using Node 22.
 
-3. Run `npm i -g pnpm` to install pnpm.
+3. Run `npm i -g pnpm@latest-10` to install pnpm.
 
 4. Run `pnpm i` to install the dependencies.
 
