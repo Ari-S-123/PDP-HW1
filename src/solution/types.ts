@@ -6,3 +6,5 @@ export type PromptFilters = {
   type?: string;
   result?: PromptResult;
 };
+
+export type SortOn = "id" | "model" | "version" | "type" | "date" | "result";

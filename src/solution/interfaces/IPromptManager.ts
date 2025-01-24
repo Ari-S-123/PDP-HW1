@@ -1,5 +1,5 @@
 import type IPrompt from "./IPrompt";
-import type { PromptFilters } from "../types";
+import type { PromptFilters, SortOn } from "../types";
 import type { SortOrder } from "../enums";
 
 /**
@@ -23,6 +23,12 @@ export default interface IPromptManager {
    * @param {SortOrder} sortOrder The sort order to set.
    */
   set sortOrder(sortOrder: SortOrder);
+
+  /**
+   * Sorts the prompts of the prompt manager.
+   * @param {SortOn} sortOn The field to sort on.
+   */
+  sortPrompts(sortOn: SortOn): void;
 
   /**
    * Adds a prompt to the prompt manager.

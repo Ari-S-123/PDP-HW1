@@ -1,7 +1,7 @@
 import type IPromptManager from "../interfaces/IPromptManager";
 import type IPrompt from "../interfaces/IPrompt";
 import { SortOrder } from "../enums";
-import type { PromptFilters } from "../types";
+import type { PromptFilters, SortOn } from "../types";
 import { browser } from "$app/environment";
 
 /**
@@ -76,6 +76,20 @@ export default class PromptStorageService implements IPromptManager {
     }
     this._sortOrder = sortOrder;
     this.saveToStorage();
+  }
+
+  /**
+   * Sorts the prompts of the prompt manager.
+   * @param {SortOn} sortOn The field to sort on.
+   */
+  public sortPrompts(sortOn: SortOn): void {
+    this._prompts.sort((a, b) => {
+      if (this._sortOrder === SortOrder.Ascending) {
+        return a[sortOn] > b[sortOn] ? 1 : -1;
+      } else {
+        return a[sortOn] < b[sortOn] ? 1 : -1;
+      }
+    });
   }
 
   /**

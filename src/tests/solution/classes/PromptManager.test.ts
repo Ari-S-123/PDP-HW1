@@ -54,4 +54,14 @@ describe("PromptManager Test Suite", () => {
     expect(filteredPrompts).toContain(DUMMY_TEXT_PROMPT_1);
     expect(filteredPrompts).not.toContain(DUMMY_MULTIMODAL_PROMPT_1);
   });
+
+  it("should sort prompts correctly", () => {
+    testPromptManager.addPrompt(DUMMY_TEXT_PROMPT_1);
+    testPromptManager.addPrompt(DUMMY_MULTIMODAL_PROMPT_1);
+    expect(testPromptManager.prompts[0]).toBe(DUMMY_TEXT_PROMPT_1);
+    expect(testPromptManager.prompts[1]).toBe(DUMMY_MULTIMODAL_PROMPT_1);
+    testPromptManager.sortPrompts("type");
+    expect(testPromptManager.prompts[0]).toBe(DUMMY_MULTIMODAL_PROMPT_1);
+    expect(testPromptManager.prompts[1]).toBe(DUMMY_TEXT_PROMPT_1);
+  });
 });
