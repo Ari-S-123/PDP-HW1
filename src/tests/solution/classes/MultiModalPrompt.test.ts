@@ -17,7 +17,8 @@ describe("MultiModalPrompt Test Suite", () => {
       DUMMY_MULTIMODAL_PROMPT_1.result,
       DUMMY_MULTIMODAL_PROMPT_1.input,
       DUMMY_MULTIMODAL_PROMPT_1.output,
-      DUMMY_MULTIMODAL_PROMPT_1.attachments
+      DUMMY_MULTIMODAL_PROMPT_1.inputAttachments,
+      DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
     );
   });
 
@@ -30,11 +31,12 @@ describe("MultiModalPrompt Test Suite", () => {
     expect(defaultMultiModalPrompt.type).toBe("Multimodal");
     expect(defaultMultiModalPrompt.input).toBe("Please translate Eng-to-French: 'Hello, world!'");
     expect(defaultMultiModalPrompt.output).toBe("Bonjour, le monde!");
-    expect(defaultMultiModalPrompt.attachments).toStrictEqual([]);
+    expect(defaultMultiModalPrompt.inputAttachments).toStrictEqual([]);
+    expect(defaultMultiModalPrompt.outputAttachments).toStrictEqual([]);
   });
 
   it("should throw errors for invalid input into constructor", () => {
-    // Invalid prompt should not be possible because of the enum, output can be empty, attachments can be an empty list
+    // Invalid prompt should not be possible because of the enum, output can be empty, both attachments can be an empty list
     expect(() => {
       new MultiModalPrompt(
         "",
@@ -44,7 +46,8 @@ describe("MultiModalPrompt Test Suite", () => {
         DUMMY_MULTIMODAL_PROMPT_1.result,
         "",
         DUMMY_MULTIMODAL_PROMPT_1.output,
-        DUMMY_MULTIMODAL_PROMPT_1.attachments
+        DUMMY_MULTIMODAL_PROMPT_1.inputAttachments,
+        DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
       );
     }).toThrowError("Invalid prompt model");
     expect(() => {
@@ -56,7 +59,8 @@ describe("MultiModalPrompt Test Suite", () => {
         DUMMY_MULTIMODAL_PROMPT_1.result,
         DUMMY_MULTIMODAL_PROMPT_1.input,
         DUMMY_MULTIMODAL_PROMPT_1.output,
-        DUMMY_MULTIMODAL_PROMPT_1.attachments
+        DUMMY_MULTIMODAL_PROMPT_1.inputAttachments,
+        DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
       );
     }).toThrowError("Invalid prompt model");
 
@@ -69,7 +73,8 @@ describe("MultiModalPrompt Test Suite", () => {
         DUMMY_MULTIMODAL_PROMPT_1.result,
         DUMMY_MULTIMODAL_PROMPT_1.input,
         DUMMY_MULTIMODAL_PROMPT_1.output,
-        DUMMY_MULTIMODAL_PROMPT_1.attachments
+        DUMMY_MULTIMODAL_PROMPT_1.inputAttachments,
+        DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
       );
     }).toThrowError("Invalid prompt version");
 
@@ -82,7 +87,8 @@ describe("MultiModalPrompt Test Suite", () => {
         DUMMY_MULTIMODAL_PROMPT_1.result,
         DUMMY_MULTIMODAL_PROMPT_1.input,
         DUMMY_MULTIMODAL_PROMPT_1.output,
-        DUMMY_MULTIMODAL_PROMPT_1.attachments
+        DUMMY_MULTIMODAL_PROMPT_1.inputAttachments,
+        DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
       );
     }).toThrowError("Invalid prompt date");
 
@@ -95,7 +101,8 @@ describe("MultiModalPrompt Test Suite", () => {
         DUMMY_MULTIMODAL_PROMPT_1.result,
         "",
         DUMMY_MULTIMODAL_PROMPT_1.output,
-        DUMMY_MULTIMODAL_PROMPT_1.attachments
+        DUMMY_MULTIMODAL_PROMPT_1.inputAttachments,
+        DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
       );
     }).toThrowError("Invalid prompt input");
   });
@@ -109,8 +116,12 @@ describe("MultiModalPrompt Test Suite", () => {
     expect(testMultiModalPrompt.type).toBe(DUMMY_MULTIMODAL_PROMPT_1.type);
     expect(testMultiModalPrompt.input).toBe(DUMMY_MULTIMODAL_PROMPT_1.input);
     expect(testMultiModalPrompt.output).toBe(DUMMY_MULTIMODAL_PROMPT_1.output);
-    expect(testMultiModalPrompt.attachments).toBe(DUMMY_MULTIMODAL_PROMPT_1.attachments);
-    expect(testMultiModalPrompt.attachments).toContain(DUMMY_ATTACHMENT_1);
+    expect(testMultiModalPrompt.inputAttachments).toBe(DUMMY_MULTIMODAL_PROMPT_1.inputAttachments);
+    expect(testMultiModalPrompt.inputAttachments).not.toContain(DUMMY_ATTACHMENT_1);
+    expect(testMultiModalPrompt.outputAttachments).toBe(
+      DUMMY_MULTIMODAL_PROMPT_1.outputAttachments
+    );
+    expect(testMultiModalPrompt.outputAttachments).toContain(DUMMY_ATTACHMENT_1);
   });
 
   it("should return correct values for setters", () => {
@@ -145,9 +156,12 @@ describe("MultiModalPrompt Test Suite", () => {
     const newAttachment1 = new Attachment("audio", "screaming.mp3");
     const newAttachment2 = new Attachment("video", "meme.mp4");
 
-    const newAttachments = [newAttachment1, newAttachment2];
-    testMultiModalPrompt.attachments = newAttachments;
-    expect(testMultiModalPrompt.attachments).toBe(newAttachments);
+    const newInputAttachments = [newAttachment1];
+    const newOutputAttachments = [newAttachment2];
+    testMultiModalPrompt.inputAttachments = newInputAttachments;
+    expect(testMultiModalPrompt.inputAttachments).toBe(newInputAttachments);
+    testMultiModalPrompt.outputAttachments = newOutputAttachments;
+    expect(testMultiModalPrompt.outputAttachments).toBe(newOutputAttachments);
   });
 
   it("should throw errors for invalid input into setters", () => {
@@ -169,7 +183,7 @@ describe("MultiModalPrompt Test Suite", () => {
   });
 
   it("should return correct string representation", () => {
-    const expectedString = `⭐️ Prompt ID: ${testMultiModalPrompt.id}, Date: (${DUMMY_MULTIMODAL_PROMPT_1.date.toLocaleDateString()}), Model: ${DUMMY_MULTIMODAL_PROMPT_1.model}, Version: ${DUMMY_MULTIMODAL_PROMPT_1.version}, Result: ${DUMMY_MULTIMODAL_PROMPT_1.result}, Input: ${DUMMY_MULTIMODAL_PROMPT_1.input}, Output: ${DUMMY_MULTIMODAL_PROMPT_1.output}, Attachments: ${DUMMY_MULTIMODAL_PROMPT_1.attachments}`;
+    const expectedString = `⭐️ Prompt ID: ${testMultiModalPrompt.id}, Date: (${DUMMY_MULTIMODAL_PROMPT_1.date.toLocaleDateString()}), Model: ${DUMMY_MULTIMODAL_PROMPT_1.model}, Version: ${DUMMY_MULTIMODAL_PROMPT_1.version}, Result: ${DUMMY_MULTIMODAL_PROMPT_1.result}, Input: ${DUMMY_MULTIMODAL_PROMPT_1.input}, Output: ${DUMMY_MULTIMODAL_PROMPT_1.output}, Input Attachments: ${DUMMY_MULTIMODAL_PROMPT_1.inputAttachments}, Output Attachments: ${DUMMY_MULTIMODAL_PROMPT_1.outputAttachments}`;
     expect(testMultiModalPrompt.toString()).toBe(expectedString);
   });
 });

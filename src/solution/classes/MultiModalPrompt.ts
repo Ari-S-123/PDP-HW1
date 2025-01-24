@@ -7,7 +7,8 @@ import { PromptResult } from "../enums";
  * @class Implementing the duties of a multimodal prompt.
  */
 export default class MultiModalPrompt extends TextPrompt implements IMultiModalPrompt {
-  protected _attachments: IAttachment[];
+  protected _inputAttachments: IAttachment[];
+  protected _outputAttachments: IAttachment[];
 
   /**
    * Initializes the multimodal prompt.
@@ -18,7 +19,8 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * @param {PromptResult} result The result of the prompt.
    * @param {string} input The input text of the prompt.
    * @param {string} output The output text of the prompt.
-   * @param {IAttachment[]} attachments The attachments of the prompt.
+   * @param {IAttachment[]} inputAttachments The input attachments of the prompt.
+   * @param {IAttachment[]} outputAttachments The output attachments of the prompt.
    */
   public constructor(
     model: string = "Claude",
@@ -28,36 +30,63 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
     result: PromptResult = PromptResult.Success,
     input: string = "Please translate Eng-to-French: 'Hello, world!'",
     output: string = "Bonjour, le monde!",
-    attachments: IAttachment[] = []
+    inputAttachments: IAttachment[] = [],
+    outputAttachments: IAttachment[] = []
   ) {
     super(model, version, type, date, result, input, output);
-    if (!attachments) {
-      throw new Error("Invalid prompt attachments");
+    if (!inputAttachments) {
+      throw new Error("Invalid prompt input attachments");
     }
-    this._attachments = attachments;
+    if (!outputAttachments) {
+      throw new Error("Invalid prompt output attachments");
+    }
+    this._inputAttachments = inputAttachments;
+    this._outputAttachments = outputAttachments;
   }
 
   /**
-   * Gets the attachments of the prompt.
-   * @returns {IAttachment[]} The attachments of the prompt.
+   * Gets the input attachments of the prompt.
+   * @returns {IAttachment[]} The input attachments of the prompt.
    */
-  public get attachments(): IAttachment[] {
-    return this._attachments;
+  get inputAttachments(): IAttachment[] {
+    return this._inputAttachments;
   }
 
   /**
-   * Sets the attachments of the prompt, which can be empty.
-   * @param {IAttachment[]} attachments The attachments of the prompt.
+   * Gets the output attachments of the prompt.
+   * @returns {IAttachment[]} The output attachments of the prompt.
    */
-  public set attachments(attachments: IAttachment[]) {
-    this._attachments = attachments;
+  get outputAttachments(): IAttachment[] {
+    return this._outputAttachments;
+  }
+
+  /**
+   * Sets the input attachments of the prompt.
+   * @param {IAttachment[]} inputAttachments The input attachments of the prompt.
+   */
+  set inputAttachments(inputAttachments: IAttachment[]) {
+    if (!inputAttachments) {
+      throw new Error("Invalid prompt input attachments");
+    }
+    this._inputAttachments = inputAttachments;
+  }
+
+  /**
+   * Sets the output attachments of the prompt.
+   * @param {IAttachment[]} outputAttachments The output attachments of the prompt.
+   */
+  set outputAttachments(outputAttachments: IAttachment[]) {
+    if (!outputAttachments) {
+      throw new Error("Invalid prompt output attachments");
+    }
+    this._outputAttachments = outputAttachments;
   }
 
   /**
    * Returns a string representation of the multimodal prompt.
    * @returns {string} The multimodal prompt as a string.
    */
-  toString(): string {
-    return `${super.toString()}, Attachments: ${this._attachments}`;
+  public toString(): string {
+    return `${super.toString()}, Input Attachments: ${this._inputAttachments}, Output Attachments: ${this._outputAttachments}`;
   }
 }
