@@ -16,7 +16,7 @@ API. I didn't write the tests for this class because I would have to mock the lo
 ## TODO
 
 - [ ] Refactor the PromptsTable component in the frontend to a proper PromptsDataTable component with built-in sorting
-  and filtering.
+      and filtering.
 
 ## Screenshots
 
