@@ -1,10 +1,22 @@
 ## About
 
-This is a webapp made with SvelteKit and OOP that helps you keep tracks of you generative AI prompts. You can see a of all your
+This is a webapp made with SvelteKit and OOP that helps you keep tracks of you generative AI prompts. You can see a of
+all your
 prompts and add and delete from the table to your heart's content. Unfortunately, you cannot upload any actual files as
 that would be too costly to maintain. As there is no backend due to being out of scope for this homework assignment,
 all the data is stored in the browser's localStorage API which is not reliable for long term storage as it can be
 overwritten very easily.
+
+### Creative Addition for Rubric
+
+The [PromptStorageService](https://github.com/Ari-S-123/PDP-HW1/blob/main/src/solution/classes/PromptStorageService.ts)
+class is the "creative addition" for the rubric. It implements the duties of a prompt manager using the localStorage
+API. I didn't write the tests for this class because I would have to mock the localStorage API.
+
+## TODO
+
+- [ ] Refactor the PromptsTable component in the frontend to a proper PromptsDataTable component with built-in sorting
+  and filtering.
 
 ## Screenshots
 
