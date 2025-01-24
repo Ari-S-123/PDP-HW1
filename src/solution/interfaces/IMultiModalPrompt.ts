@@ -1,6 +1,9 @@
 import type IAttachment from "./IAttachment";
 import type ITextPrompt from "./ITextPrompt";
 
+/**
+ * @Interface IMultiModalPrompt describing the duties of a multimodal prompt.
+ */
 export default interface IMultiModalPrompt extends ITextPrompt {
   /**
    * Gets the attachments of the prompt.

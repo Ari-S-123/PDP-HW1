@@ -1,5 +1,8 @@
 import type IPrompt from "./IPrompt";
 
+/**
+ * @Interface ITextPrompt describing the duties of a text prompt.
+ */
 export default interface ITextPrompt extends IPrompt {
   /**
    * Gets the input text of the prompt.

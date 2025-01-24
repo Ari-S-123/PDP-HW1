@@ -2,6 +2,9 @@ import type IPrompt from "./IPrompt";
 import type { PromptFilters } from "../types";
 import type { SortOrder } from "../enums";
 
+/**
+ * @Interface IPromptManager describing the duties of a prompt manager.
+ */
 export default interface IPromptManager {
   /**
    * Gets the prompts of the prompt manager.

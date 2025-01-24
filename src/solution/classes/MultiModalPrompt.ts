@@ -3,6 +3,9 @@ import type IMultiModalPrompt from "../interfaces/IMultiModalPrompt";
 import type IAttachment from "../interfaces/IAttachment";
 import { PromptResult } from "../enums";
 
+/**
+ * @class Implementing the duties of a multimodal prompt.
+ */
 export default class MultiModalPrompt extends TextPrompt implements IMultiModalPrompt {
   protected _attachments: IAttachment[];
 

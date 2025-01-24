@@ -3,6 +3,9 @@ import type IPrompt from "../interfaces/IPrompt";
 import { SortOrder } from "../enums";
 import type { PromptFilters } from "../types";
 
+/**
+ * @class Implementing the duties of a prompt manager.
+ */
 export default class PromptManager implements IPromptManager {
   protected _prompts: IPrompt[] = [];
   protected _sortOrder: SortOrder = SortOrder.Ascending;

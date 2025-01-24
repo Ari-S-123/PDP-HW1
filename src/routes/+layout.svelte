@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-  <title>PDP-HW1-Ari</title>
+  <title>Gen AI Prompt Tracker</title>
   <meta
     name="description"
     content="Gen AI Prompt Tracker: An app that helps you keep track of all your AI prompts."
@@ -22,13 +22,13 @@
 <ModeWatcher />
 <Toaster />
 
-<div class="min-h-screen transition-colors duration-300">
-  <nav class="flex justify-between gap-4 p-4">
-    <div class="flex items-center justify-center gap-2">
+<div class="min-h-screen transition-colors duration-300" aria-label="Root layout">
+  <nav class="flex justify-between gap-4 p-4" aria-label="Top navbar">
+    <div class="flex items-center justify-center gap-2" aria-label="Website heading with logo">
       <img src="favicon.png" alt="Robot logo" class="h-12 w-12" />
       <h1 class="flex items-center text-5xl font-extrabold">Gen AI Prompt Tracker</h1>
     </div>
-    <div class="flex gap-4 p-4">
+    <div class="flex gap-4 p-4" aria-label="Nav button container">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger class={buttonVariants({ variant: "outline", size: "icon" })}>
           <Sun

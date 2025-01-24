@@ -9,7 +9,7 @@
   let prompts = $state(storageService.prompts);
 </script>
 
-<div class="m-8 flex flex-col items-center justify-center gap-4">
+<div class="mx-8 mt-2 flex flex-col items-center justify-center gap-4" aria-label="Page container">
   <PromptsTable {prompts} />
   <AddPromptDialog bind:prompts />
 </div>

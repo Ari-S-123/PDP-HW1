@@ -1,5 +1,8 @@
 import type { PromptResult } from "../enums";
 
+/**
+ * @Interface IPrompt describing the duties of a prompt.
+ */
 export default interface IPrompt {
   /**
    * Gets the prompt id.
