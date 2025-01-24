@@ -166,6 +166,6 @@ export default class Prompt implements IPrompt {
    * @returns {string} The prompt as a string.
    */
   public toString(): string {
-    return `⭐️ Prompt ${this._id} (${this._date.toLocaleDateString()}) ${this._model} ${this._version} - ${this._result}`;
+    return `⭐️ Prompt ID: ${this._id}, Date: (${this._date.toLocaleDateString()}), Model: ${this._model}, Version: ${this._version}, Result: ${this._result}`;
   }
 }

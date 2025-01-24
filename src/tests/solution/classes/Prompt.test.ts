@@ -108,7 +108,7 @@ describe("Prompt Test Suite", () => {
   });
 
   it("should return correct string representation", () => {
-    const expectedString = `⭐️ Prompt ${testPrompt.id} (${DUMMY_PROMPT_1.date.toLocaleDateString()}) ${DUMMY_PROMPT_1.model} ${DUMMY_PROMPT_1.version} - ${DUMMY_PROMPT_1.result}`;
+    const expectedString = `⭐️ Prompt ID: ${testPrompt.id}, Date: (${DUMMY_PROMPT_1.date.toLocaleDateString()}), Model: ${DUMMY_PROMPT_1.model}, Version: ${DUMMY_PROMPT_1.version}, Result: ${DUMMY_PROMPT_1.result}`;
     expect(testPrompt.toString()).toBe(expectedString);
   });
 });

@@ -169,7 +169,7 @@ describe("MultiModalPrompt Test Suite", () => {
   });
 
   it("should return correct string representation", () => {
-    const expectedString = `⭐️ Prompt ${testMultiModalPrompt.id} (${DUMMY_MULTIMODAL_PROMPT_1.date.toLocaleDateString()}) ${DUMMY_MULTIMODAL_PROMPT_1.model} ${DUMMY_MULTIMODAL_PROMPT_1.version} - ${DUMMY_MULTIMODAL_PROMPT_1.result} Input: ${DUMMY_MULTIMODAL_PROMPT_1.input} Output: ${DUMMY_MULTIMODAL_PROMPT_1.output} Attachments: ${DUMMY_MULTIMODAL_PROMPT_1.attachments}`;
+    const expectedString = `⭐️ Prompt ID: ${testMultiModalPrompt.id}, Date: (${DUMMY_MULTIMODAL_PROMPT_1.date.toLocaleDateString()}), Model: ${DUMMY_MULTIMODAL_PROMPT_1.model}, Version: ${DUMMY_MULTIMODAL_PROMPT_1.version}, Result: ${DUMMY_MULTIMODAL_PROMPT_1.result}, Input: ${DUMMY_MULTIMODAL_PROMPT_1.input}, Output: ${DUMMY_MULTIMODAL_PROMPT_1.output}, Attachments: ${DUMMY_MULTIMODAL_PROMPT_1.attachments}`;
     expect(testMultiModalPrompt.toString()).toBe(expectedString);
   });
 });

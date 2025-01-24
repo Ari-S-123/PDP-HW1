@@ -58,6 +58,6 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * @returns {string} The multimodal prompt as a string.
    */
   toString(): string {
-    return `⭐️ Prompt ${this._id} (${this._date.toLocaleDateString()}) ${this._model} ${this._version} - ${this._result} Input: ${this._input} Output: ${this._output} Attachments: ${this._attachments}`;
+    return `${super.toString()}, Attachments: ${this._attachments}`;
   }
 }
