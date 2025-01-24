@@ -33,6 +33,7 @@ describe("Attachment Test Suite", () => {
     expect(testAttachment.payload).toBe(DUMMY_ATTACHMENT_2.payload);
   });
 
+  // This test was generated using GitHub Copilot.
   it("should throw errors for invalid input into setters", () => {
     expect(() => {
       testAttachment.type = "";

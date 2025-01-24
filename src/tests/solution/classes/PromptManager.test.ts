@@ -31,6 +31,8 @@ describe("PromptManager Test Suite", () => {
     expect(testPromptManager.prompts).toContain(DUMMY_TEXT_PROMPT_1);
   });
 
+  // The following tests were generated using GitHub Copilot with some human modifications.
+
   it("should remove a prompt from the prompt manager correctly", () => {
     testPromptManager.addPrompt(DUMMY_TEXT_PROMPT_1);
     expect(testPromptManager.prompts).toContain(DUMMY_TEXT_PROMPT_1);

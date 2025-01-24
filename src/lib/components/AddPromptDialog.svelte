@@ -57,7 +57,7 @@
       const filenameMatch = input.match(/filename:\s*([^,]+)/);
 
       if (!typeMatch || !filenameMatch) {
-        throw new Error("Invalid format");
+        throw new Error('Invalid format, Please strictly follow "type: abc, filename: xyz"');
       }
 
       return {
@@ -66,7 +66,7 @@
         filename: filenameMatch[1].trim()
       };
     } catch (error) {
-      attachmentsError = error + ', Please strictly follow "type: abc, filename: xyz"';
+      attachmentsError = error + ""; // kinda dirty
       return undefined;
     }
   }

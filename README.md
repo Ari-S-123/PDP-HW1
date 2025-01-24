@@ -13,8 +13,14 @@ The [PromptStorageService](https://github.com/Ari-S-123/PDP-HW1/blob/main/src/so
 class is the "creative addition" for the rubric. It implements the duties of a prompt manager using the localStorage
 API. I didn't write the tests for this class because I would have to mock the localStorage API.
 
+### Generative AI Usage
+
+I used GitHub Copilot to generate some repetitive unit tests. They are marked with a comment above them in each test
+file in src/tests/solution/.
+
 ## TODO
 
+- [ ] Update IPromptManager and all its users to include a text search on the inputted prompt on getFilteredPrompts.
 - [ ] Refactor the PromptsTable component in the frontend to a proper PromptsDataTable component with built-in sorting
       and filtering.
 

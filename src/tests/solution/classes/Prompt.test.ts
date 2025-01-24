@@ -92,6 +92,7 @@ describe("Prompt Test Suite", () => {
     expect(testPrompt.type).toBe(newType);
   });
 
+  // This test was generated using GitHub Copilot.
   it("should throw errors for invalid input into setters", () => {
     expect(() => {
       testPrompt.date = new Date("invalid");
