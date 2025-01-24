@@ -6,8 +6,8 @@ import { PromptResult } from "../enums";
  * @class Implementing the duties of a text prompt.
  */
 export default class TextPrompt extends Prompt implements ITextPrompt {
-  protected _input: string = "Please translate Eng-to-French: 'Hello, world!'";
-  protected _output: string = "Bonjour, le monde!";
+  protected _input: string;
+  protected _output: string;
 
   /**
    * Initializes the text prompt.

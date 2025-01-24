@@ -4,8 +4,8 @@ import type IAttachment from "../interfaces/IAttachment";
  * @class Implementing the duties of an attachment.
  */
 export default class Attachment implements IAttachment {
-  private _type: string;
-  private _payload: string;
+  protected _type: string;
+  protected _payload: string;
 
   /**
    * @constructor Initializing the attachment.
