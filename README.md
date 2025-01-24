@@ -8,10 +8,10 @@ overwritten very easily.
 
 ## Screenshots
 
-![Screenshot 2025-01-23 120252](https://github.com/user-attachments/assets/27ec48bb-7e46-4199-889f-e3bd472b4913)
-![Screenshot 2025-01-23 120317](https://github.com/user-attachments/assets/a3ffef37-e2aa-4c0b-bd38-e96641647339)
-![Screenshot 2025-01-23 120332](https://github.com/user-attachments/assets/c5d103e3-729d-4191-bd8f-4245b7d28f8b)
-![Screenshot 2025-01-23 120359](https://github.com/user-attachments/assets/d99f11b1-1322-411f-b67b-587ac2def1a6)
+![Screenshot 2025-01-23 190326](https://github.com/user-attachments/assets/4916710a-1def-492c-b1e4-11a31f518edc)
+![Screenshot 2025-01-23 190359](https://github.com/user-attachments/assets/402b6fac-aa9d-464e-a66e-c22dfac55acf)
+![Screenshot 2025-01-23 190341](https://github.com/user-attachments/assets/ff28d940-7a2c-4c75-b718-fec456aa7bcd)
+![Screenshot 2025-01-23 190409](https://github.com/user-attachments/assets/0c9248bc-ae96-4bf2-815f-d8692e576e0d)
 
 ## Setup
 
