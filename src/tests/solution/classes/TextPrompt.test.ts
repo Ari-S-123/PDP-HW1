@@ -147,7 +147,7 @@ describe("TextPrompt Test Suite", () => {
   });
 
   it("should return correct string representation", () => {
-    const expectedString = `⭐️ Prompt ${testTextPrompt.id} (${DUMMY_TEXT_PROMPT_1.date.toLocaleDateString()}) ${DUMMY_TEXT_PROMPT_1.model} ${DUMMY_TEXT_PROMPT_1.version} - ${DUMMY_TEXT_PROMPT_1.result} Input: ${DUMMY_TEXT_PROMPT_1.input} Output: ${DUMMY_TEXT_PROMPT_1.output}`;
+    const expectedString = `⭐️ Prompt ID: ${testTextPrompt.id}, Date: (${DUMMY_TEXT_PROMPT_1.date.toLocaleDateString()}), Model: ${DUMMY_TEXT_PROMPT_1.model}, Version: ${DUMMY_TEXT_PROMPT_1.version}, Result: ${DUMMY_TEXT_PROMPT_1.result}, Input: ${DUMMY_TEXT_PROMPT_1.input}, Output: ${DUMMY_TEXT_PROMPT_1.output}`;
     expect(testTextPrompt.toString()).toBe(expectedString);
   });
 });

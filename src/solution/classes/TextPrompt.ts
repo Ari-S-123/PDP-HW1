@@ -80,6 +80,6 @@ export default class TextPrompt extends Prompt implements ITextPrompt {
    * @returns {string} The text prompt as a string.
    */
   public toString(): string {
-    return `⭐️ Prompt ${this._id} (${this._date.toLocaleDateString()}) ${this._model} ${this._version} - ${this._result} Input: ${this._input} Output: ${this._output}`;
+    return `${super.toString()}, Input: ${this._input}, Output: ${this._output}`;
   }
 }
