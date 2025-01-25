@@ -1,5 +1,3 @@
-import type { PromptResult } from "../enums";
-
 /**
  * @Interface IPrompt describing the duties of a prompt.
  */
@@ -37,10 +35,10 @@ export default interface IPrompt {
 
   /**
    * Gets the result of the prompt.
-   * E.g. "Success or Failure".
-   * @returns {PromptResult} The prompt result.
+   * E.g. "Success, Failure, or anything in between".
+   * @returns {string} A string describing the prompt result.
    */
-  get result(): PromptResult;
+  get result(): string;
 
   /**
    * Sets the generative AI model used for this prompt.
@@ -69,8 +67,8 @@ export default interface IPrompt {
 
   /**
    * Sets the result of the prompt.
-   * E.g. "Success or Failure".
-   * @param {string} result The prompt result.
+   * E.g. "Success or Failure or anything in between".
+   * @param {string} result A string describing the prompt result.
    */
   set result(result: string);
 

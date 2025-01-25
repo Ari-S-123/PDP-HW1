@@ -1,5 +1,4 @@
 import type IPrompt from "../interfaces/IPrompt";
-import { PromptResult } from "../enums";
 import { v4 as uuidv4 } from "uuid";
 
 /**
@@ -11,7 +10,7 @@ export default class Prompt implements IPrompt {
   protected _version: string;
   protected _type: string;
   protected _date: Date;
-  protected _result: PromptResult;
+  protected _result: string;
 
   /**
    * Initializes the prompt.
@@ -19,14 +18,14 @@ export default class Prompt implements IPrompt {
    * @param {string} version The version of the model used.
    * @param {string} type The type of prompt.
    * @param {Date} date The date the prompt was created.
-   * @param {PromptResult} result The result of the prompt.
+   * @param {string} result The result of the prompt.
    */
   public constructor(
     model: string = "Claude",
     version: string = "Sonnet 3.5",
     type: string = "Text-to-Text",
     date: Date = new Date(),
-    result: PromptResult = PromptResult.Success
+    result: string = "Successful"
   ) {
     if (!model) {
       throw new Error("Invalid prompt model");
@@ -93,10 +92,10 @@ export default class Prompt implements IPrompt {
 
   /**
    * Gets the result of the prompt.
-   * E.g. "Success or Failure".
-   * @returns {PromptResult} The prompt result.
+   * E.g. "Success, Failure, or anything in between".
+   * @returns {string} A string describing the prompt result.
    */
-  public get result(): PromptResult {
+  public get result(): string {
     return this._result;
   }
 
@@ -151,10 +150,10 @@ export default class Prompt implements IPrompt {
 
   /**
    * Sets the result of the prompt.
-   * @param {PromptResult} result The prompt result.
-   * @throws {Error} If the result is invalid.
+   * E.g. "Success or Failure or anything in between".
+   * @param {string} result A string describing the prompt result.
    */
-  public set result(result: PromptResult) {
+  public set result(result: string) {
     if (!result) {
       throw new Error("Invalid prompt result");
     }

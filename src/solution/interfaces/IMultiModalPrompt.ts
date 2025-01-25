@@ -6,14 +6,26 @@ import type ITextPrompt from "./ITextPrompt";
  */
 export default interface IMultiModalPrompt extends ITextPrompt {
   /**
-   * Gets the attachments of the prompt.
-   * @returns {IAttachment[]} The attachments of the prompt.
+   * Gets the input attachments of the prompt.
+   * @returns {IAttachment[]} The input attachments of the prompt.
    */
-  get attachments(): IAttachment[];
+  get inputAttachments(): IAttachment[];
 
   /**
-   * Sets the attachments of the prompt.
-   * @param {IAttachment[]} attachments The attachments of the prompt.
+   * Gets the output attachments of the prompt.
+   * @returns {IAttachment[]} The output attachments of the prompt.
    */
-  set attachments(attachments: IAttachment[]);
+  get outputAttachments(): IAttachment[];
+
+  /**
+   * Sets the input attachments of the prompt.
+   * @param {IAttachment[]} inputAttachments The input attachments of the prompt.
+   */
+  set inputAttachments(inputAttachments: IAttachment[]);
+
+  /**
+   * Sets the output attachments of the prompt.
+   * @param {IAttachment[]} outputAttachments The output attachments of the prompt.
+   */
+  set outputAttachments(outputAttachments: IAttachment[]);
 }

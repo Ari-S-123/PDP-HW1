@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { DUMMY_PROMPT_1 } from "../../test-dummies/prompts";
 import Prompt from "../../../solution/classes/Prompt";
-import { PromptResult } from "../../../solution/enums";
 
 describe("Prompt Test Suite", () => {
   let testPrompt: Prompt;
@@ -17,9 +16,8 @@ describe("Prompt Test Suite", () => {
   });
 
   it("should throw errors for invalid input into constructor", () => {
-    // Invalid prompt should not be possible because of the enum
     expect(() => {
-      new Prompt("", "", "", new Date("invalid"), DUMMY_PROMPT_1.result);
+      new Prompt("", "", "", new Date("invalid"), "");
     }).toThrowError("Invalid prompt model");
     expect(() => {
       new Prompt(
@@ -50,6 +48,16 @@ describe("Prompt Test Suite", () => {
         DUMMY_PROMPT_1.result
       );
     }).toThrowError("Invalid prompt date");
+
+    expect(() => {
+      new Prompt(
+        DUMMY_PROMPT_1.model,
+        DUMMY_PROMPT_1.version,
+        DUMMY_PROMPT_1.type,
+        DUMMY_PROMPT_1.date,
+        ""
+      );
+    }).toThrowError("Invalid prompt result");
   });
 
   it("should create a Prompt instance with default values", () => {
@@ -57,7 +65,7 @@ describe("Prompt Test Suite", () => {
     expect(defaultPrompt.id).toBeTruthy();
     expect(defaultPrompt.model).toBe("Claude");
     expect(defaultPrompt.version).toBe("Sonnet 3.5");
-    expect(defaultPrompt.result).toBe("Success");
+    expect(defaultPrompt.result).toBe("Successful");
     expect(defaultPrompt.type).toBe("Text-to-Text");
   });
 
@@ -83,7 +91,7 @@ describe("Prompt Test Suite", () => {
     testPrompt.version = newVersion;
     expect(testPrompt.version).toBe(newVersion);
 
-    const newResult = PromptResult.Failure;
+    const newResult = "Failed";
     testPrompt.result = newResult;
     expect(testPrompt.result).toBe(newResult);
 
@@ -105,6 +113,10 @@ describe("Prompt Test Suite", () => {
     expect(() => {
       testPrompt.version = "";
     }).toThrowError("Invalid prompt version");
+
+    expect(() => {
+      testPrompt.result = "";
+    }).toThrowError("Invalid prompt result");
   });
 
   it("should return correct string representation", () => {
