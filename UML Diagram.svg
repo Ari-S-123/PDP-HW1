@@ -1,0 +1,500 @@
+<svg version="1.1" baseProfile="full" width="1022.5" height="1494.0" viewBox="0 0 1022.5 1494" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[&lt;enumeration&gt;SortOrder|Ascending;Descending]
+[&lt;type&gt;PromptFilters|+model?: string;+version?: string;+type?: string;+result?: PromptResult|]
+[Attachment|\#_type: string;\#_payload: string|+toString(): string]
+[IAttachment]&lt;:--[Attachment]
+[MultiModalPrompt|\#_inputAttachments: IAttachment\[\];\#_outputAttachments: IAttachment\[\]|+toString(): string]
+[TextPrompt]&lt;:-[MultiModalPrompt]
+[IMultiModalPrompt]&lt;:--[MultiModalPrompt]
+[MultiModalPrompt]  - 0..* [IAttachment]
+[MultiModalPrompt]  - 0..* [IAttachment]
+[Prompt|\#_id: string;\#_model: string;\#_version: string;\#_type: string;\#_date: Date;\#_result: string|+toString(): string]
+[IPrompt]&lt;:--[Prompt]
+[PromptManager|\#_prompts: IPrompt\[\];\#_sortOrder: SortOrder|+sortPrompts(): void;+addPrompt(): void;+removePrompt(): void;+removePromptById(): void;+getFilteredPrompts(): IPrompt\[\]]
+[IPromptManager]&lt;:--[PromptManager]
+[PromptManager]  - 0..* [IPrompt]
+[PromptManager]  -  [SortOrder]
+[PromptStorageService|\#_prompts: ITextPrompt\[\];\#_sortOrder: SortOrder;-STORAGE_KEY: &quot;promptStorageService&quot;|-loadFromStorage(): void;-saveToStorage(): void;+sortPrompts(): void;+addPrompt(): void;+removePrompt(): void;+removePromptById(): void;+getFilteredPrompts(): ITextPrompt\[\];+searchPrompts(): ITextPrompt\[\];+clearPrompts(): void]
+[ITextPromptManager]&lt;:--[PromptStorageService]
+[PromptStorageService]  - 0..* [ITextPrompt]
+[PromptStorageService]  -  [SortOrder]
+[TextPrompt|\#_input: string;\#_output: string|+toString(): string]
+[Prompt]&lt;:-[TextPrompt]
+[ITextPrompt]&lt;:--[TextPrompt]
+[TextPromptManager|\#_prompts: ITextPrompt\[\]|+searchPrompts(): ITextPrompt\[\]]
+[PromptManager]&lt;:-[TextPromptManager]
+[ITextPromptManager]&lt;:--[TextPromptManager]
+[TextPromptManager]  - 0..* [ITextPrompt]
+[&lt;interface&gt;IAttachment||+toString(): string]
+[&lt;interface&gt;IMultiModalPrompt||]
+[ITextPrompt]&lt;:--[IMultiModalPrompt]
+[&lt;interface&gt;IPrompt||+toString(): string]
+[&lt;interface&gt;IPromptManager||+sortPrompts(): void;+addPrompt(): void;+removePrompt(): void;+removePromptById(): void;+getFilteredPrompts(): IPrompt\[\]]
+[&lt;interface&gt;ITextPrompt||]
+[IPrompt]&lt;:--[ITextPrompt]
+[&lt;interface&gt;ITextPromptManager||+searchPrompts(): ITextPrompt\[\]]
+[IPromptManager]&lt;:--[ITextPromptManager]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="1494.0" width="1022.5" stroke="none"></rect>
+</g>
+<g transform="translate(48, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M635.5 1299.3 L635.5 1306 L635.5 1326 L635.5 1326.0 " fill="none"></path>
+</g>
+<path d="M640.8 1299.3 L635.5 1299.3 L630.2 1299.3 L635.5 1286.0 Z"></path>
+<path d="M480.5 1035.3 L480.5 1042 L521.2894736842105 1062 L521.3 1062.0 " fill="none"></path>
+<path d="M485.8 1035.3 L480.5 1035.3 L475.2 1035.3 L480.5 1022.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M741.5 1003.3 L741.5 1042 L713.6052631578948 1062 L713.6 1062.0 " fill="none"></path>
+</g>
+<path d="M746.8 1003.3 L741.5 1003.3 L736.2 1003.3 L741.5 990.0 Z"></path>
+<text x="630.6" y="1206.0" stroke="none">0..*</text>
+<path d="M620.8 1174.0 L615.5 1194 L622.6428571428571 1214 L622.6 1214.0 " fill="none"></path>
+<text x="613.4" y="1206.0" stroke="none">0..*</text>
+<path d="M650.2 1174.0 L655.5 1194 L648.3571428571429 1214 L648.4 1214.0 " fill="none"></path>
+<g stroke-dasharray="6 6">
+<path d="M460.5 572.8 L460.5 673 L460.5 693 L460.5 693.0 " fill="none"></path>
+</g>
+<path d="M465.8 572.8 L460.5 572.8 L455.2 572.8 L460.5 559.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M483.9 143.6 L460.5 157 L460.5 177 L460.5 177.0 " fill="none"></path>
+</g>
+<path d="M486.6 148.2 L483.9 143.6 L481.3 139.0 L495.5 137.0 Z"></path>
+<text x="425.5" y="479.5" stroke="none">0..*</text>
+<path d="M460.5 354.0 L460.5 374 L460.5 487.5 L460.5 487.5 " fill="none"></path>
+<path d="M326.5 294.5 L-40 374 L-40 523.5 L-40 523.5 L-40 673 L-40 673 L27.0794930875576 741.5 L27.1 741.5 " fill="none"></path>
+<g stroke-dasharray="6 6">
+<path d="M621.4 292.5 L172 374 L172 394 L172.0 394.0 " fill="none"></path>
+</g>
+<path d="M622.3 297.8 L621.4 292.5 L620.4 287.3 L634.5 290.2 Z"></path>
+<text x="695.2" y="749.5" stroke="none">0..*</text>
+<path d="M344.0 588.7 L566.5 673 L687.2142857142857 757.5 L687.2 757.5 " fill="none"></path>
+<path d="M172.0 653.0 L172 673 L105.23617511520737 741.5 L105.2 741.5 " fill="none"></path>
+<path d="M460.5 883.3 L460.5 890 L465.7631578947368 910 L465.8 910.0 " fill="none"></path>
+<path d="M465.8 883.3 L460.5 883.3 L455.2 883.3 L460.5 870.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M676.3 813.1 L566.5 890 L543.8684210526316 910 L543.9 910.0 " fill="none"></path>
+</g>
+<path d="M679.3 817.5 L676.3 813.1 L673.2 808.8 L687.2 805.5 Z"></path>
+<path d="M590.5 361.9 L606.75 374 L731.5033444816054 475.5 L731.5 475.5 " fill="none"></path>
+<path d="M593.7 357.7 L590.5 361.9 L587.3 366.2 L579.8 354.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M779.6 314.6 L790.5 374 L790.5 475.5 L790.5 475.5 " fill="none"></path>
+</g>
+<path d="M784.8 313.6 L779.6 314.6 L774.3 315.6 L777.1 301.5 Z"></path>
+<text x="691.0" y="749.5" stroke="none">0..*</text>
+<path d="M774.8 571.5 L741.75 673 L725.979262672811 757.5 L726.0 757.5 " fill="none"></path>
+<g stroke-dasharray="6 6">
+<path d="M728.3 818.6 L741.5 890 L741.5 942 L741.5 942.0 " fill="none"></path>
+</g>
+<path d="M733.6 817.6 L728.3 818.6 L723.1 819.6 L725.9 805.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M549.1 564.7 L781.75 673 L734.8271889400921 757.5 L734.8 757.5 " fill="none"></path>
+</g>
+<path d="M551.3 559.9 L549.1 564.7 L546.8 569.6 L537.0 559.1 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M747.1 143.6 L770.5 157 L770.5 229.5 L770.5 229.5 " fill="none"></path>
+</g>
+<path d="M749.7 139.0 L747.1 143.6 L744.4 148.2 L735.5 137.0 Z"></path>
+<g data-name="SortOrder">
+<g fill="lightgreen" stroke="#33322E" data-name="SortOrder">
+<rect x="11.3" y="741.5" height="80.0" width="110.0" data-name="SortOrder"></rect>
+<path d="M11.3 773.5 L121.3 773.5" fill="none" data-name="SortOrder"></path>
+</g>
+<g transform="translate(11.25, 741.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SortOrder" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="SortOrder" data-compartment="0">
+<a id="src\solution\enums.ts.SortOrder" xlink:href="src\solution\enums.ts"><text x="47.0" y="14.1" stroke="none" text-anchor="middle" data-name="SortOrder" data-compartment="0">SortOrder</text></a>
+
+</g>
+</g>
+<g transform="translate(11.25, 773.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SortOrder" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="SortOrder" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="SortOrder" data-compartment="1">Ascending</text>
+<text x="0.0" y="30.3" stroke="none" data-name="SortOrder" data-compartment="1">Descending</text>
+
+</g>
+</g>
+</g>
+<g data-name="PromptFilters">
+<g fill="lightgray" stroke="#33322E" data-name="PromptFilters">
+<rect x="245.5" y="8.0" height="121.0" width="196.0" data-name="PromptFilters"></rect>
+<path d="M245.5 40.0 L441.5 40.0" fill="none" data-name="PromptFilters"></path>
+<path d="M245.5 121.0 L441.5 121.0" fill="none" data-name="PromptFilters"></path>
+</g>
+<g transform="translate(245.5, 8)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptFilters" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PromptFilters" data-compartment="0">
+<a id="src\solution\types.ts.PromptFilters" xlink:href="src\solution\types.ts"><text x="90.0" y="14.1" stroke="none" text-anchor="middle" data-name="PromptFilters" data-compartment="0">PromptFilters</text></a>
+
+</g>
+</g>
+<g transform="translate(245.5, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptFilters" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PromptFilters" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="PromptFilters" data-compartment="1">+model?: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="PromptFilters" data-compartment="1">+version?: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="PromptFilters" data-compartment="1">+type?: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="PromptFilters" data-compartment="1">+result?: PromptResult</text>
+
+</g>
+</g>
+<g transform="translate(245.5, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptFilters" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PromptFilters" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="Attachment">
+<g fill="#eee8d5" stroke="#33322E" data-name="Attachment">
+<rect x="559.0" y="1326.0" height="112.0" width="153.0" data-name="Attachment"></rect>
+<path d="M559.0 1358.0 L712.0 1358.0" fill="none" data-name="Attachment"></path>
+<path d="M559.0 1406.0 L712.0 1406.0" fill="none" data-name="Attachment"></path>
+</g>
+<g transform="translate(559, 1326)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attachment" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Attachment" data-compartment="0">
+<a id="src\solution\classes\Attachment.ts.Attachment" xlink:href="src\solution\classes\Attachment.ts"><text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="Attachment" data-compartment="0">Attachment</text></a>
+
+</g>
+</g>
+<g transform="translate(559, 1358)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Attachment" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Attachment" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Attachment" data-compartment="1">#_type: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Attachment" data-compartment="1">#_payload: string</text>
+
+</g>
+</g>
+<g transform="translate(559, 1406)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Attachment" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Attachment" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="Attachment" data-compartment="2">+toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="IAttachment">
+<g fill="lightblue" stroke="#33322E" data-name="IAttachment">
+<rect x="559.0" y="1214.0" height="72.0" width="153.0" data-name="IAttachment"></rect>
+<path d="M559.0 1246.0 L712.0 1246.0" fill="none" data-name="IAttachment"></path>
+<path d="M559.0 1254.0 L712.0 1254.0" fill="none" data-name="IAttachment"></path>
+</g>
+<g transform="translate(559, 1214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IAttachment" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IAttachment" data-compartment="0">
+<a id="src\solution\interfaces\IAttachment.ts.IAttachment" xlink:href="src\solution\interfaces\IAttachment.ts"><text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="IAttachment" data-compartment="0">IAttachment</text></a>
+
+</g>
+</g>
+<g transform="translate(559, 1246)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IAttachment" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IAttachment" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(559, 1254)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IAttachment" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IAttachment" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="IAttachment" data-compartment="2">+toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="MultiModalPrompt">
+<g fill="#eee8d5" stroke="#33322E" data-name="MultiModalPrompt">
+<rect x="486.5" y="1062.0" height="112.0" width="298.0" data-name="MultiModalPrompt"></rect>
+<path d="M486.5 1094.0 L784.5 1094.0" fill="none" data-name="MultiModalPrompt"></path>
+<path d="M486.5 1142.0 L784.5 1142.0" fill="none" data-name="MultiModalPrompt"></path>
+</g>
+<g transform="translate(486.5, 1062)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="MultiModalPrompt" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="MultiModalPrompt" data-compartment="0">
+<a id="src\solution\classes\MultiModalPrompt.ts.MultiModalPrompt" xlink:href="src\solution\classes\MultiModalPrompt.ts"><text x="141.0" y="14.1" stroke="none" text-anchor="middle" data-name="MultiModalPrompt" data-compartment="0">MultiModalPrompt</text></a>
+
+</g>
+</g>
+<g transform="translate(486.5, 1094)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MultiModalPrompt" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MultiModalPrompt" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="MultiModalPrompt" data-compartment="1">#_inputAttachments: IAttachment[]</text>
+<text x="0.0" y="30.3" stroke="none" data-name="MultiModalPrompt" data-compartment="1">#_outputAttachments: IAttachment[]</text>
+
+</g>
+</g>
+<g transform="translate(486.5, 1142)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MultiModalPrompt" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MultiModalPrompt" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="MultiModalPrompt" data-compartment="2">+toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="TextPrompt">
+<g fill="#eee8d5" stroke="#33322E" data-name="TextPrompt">
+<rect x="404.0" y="910.0" height="112.0" width="153.0" data-name="TextPrompt"></rect>
+<path d="M404.0 942.0 L557.0 942.0" fill="none" data-name="TextPrompt"></path>
+<path d="M404.0 990.0 L557.0 990.0" fill="none" data-name="TextPrompt"></path>
+</g>
+<g transform="translate(404, 910)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TextPrompt" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TextPrompt" data-compartment="0">
+<a id="src\solution\classes\TextPrompt.ts.TextPrompt" xlink:href="src\solution\classes\TextPrompt.ts"><text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="TextPrompt" data-compartment="0">TextPrompt</text></a>
+
+</g>
+</g>
+<g transform="translate(404, 942)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TextPrompt" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TextPrompt" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TextPrompt" data-compartment="1">#_input: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TextPrompt" data-compartment="1">#_output: string</text>
+
+</g>
+</g>
+<g transform="translate(404, 990)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TextPrompt" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TextPrompt" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="TextPrompt" data-compartment="2">+toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="IMultiModalPrompt">
+<g fill="lightblue" stroke="#33322E" data-name="IMultiModalPrompt">
+<rect x="660.5" y="942.0" height="48.0" width="162.0" data-name="IMultiModalPrompt"></rect>
+<path d="M660.5 974.0 L822.5 974.0" fill="none" data-name="IMultiModalPrompt"></path>
+<path d="M660.5 982.0 L822.5 982.0" fill="none" data-name="IMultiModalPrompt"></path>
+</g>
+<g transform="translate(660.5, 942)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IMultiModalPrompt" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IMultiModalPrompt" data-compartment="0">
+<a id="src\solution\interfaces\IMultiModalPrompt.ts.IMultiModalPrompt" xlink:href="src\solution\interfaces\IMultiModalPrompt.ts"><text x="73.0" y="14.1" stroke="none" text-anchor="middle" data-name="IMultiModalPrompt" data-compartment="0">IMultiModalPrompt</text></a>
+
+</g>
+</g>
+<g transform="translate(660.5, 974)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IMultiModalPrompt" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IMultiModalPrompt" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(660.5, 982)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IMultiModalPrompt" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IMultiModalPrompt" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="Prompt">
+<g fill="#eee8d5" stroke="#33322E" data-name="Prompt">
+<rect x="384.0" y="693.0" height="177.0" width="153.0" data-name="Prompt"></rect>
+<path d="M384.0 725.0 L537.0 725.0" fill="none" data-name="Prompt"></path>
+<path d="M384.0 838.0 L537.0 838.0" fill="none" data-name="Prompt"></path>
+</g>
+<g transform="translate(384, 693)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Prompt" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Prompt" data-compartment="0">
+<a id="src\solution\classes\Prompt.ts.Prompt" xlink:href="src\solution\classes\Prompt.ts"><text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="Prompt" data-compartment="0">Prompt</text></a>
+
+</g>
+</g>
+<g transform="translate(384, 725)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Prompt" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Prompt" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Prompt" data-compartment="1">#_id: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Prompt" data-compartment="1">#_model: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Prompt" data-compartment="1">#_version: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Prompt" data-compartment="1">#_type: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="Prompt" data-compartment="1">#_date: Date</text>
+<text x="0.0" y="95.1" stroke="none" data-name="Prompt" data-compartment="1">#_result: string</text>
+
+</g>
+</g>
+<g transform="translate(384, 838)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Prompt" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Prompt" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="Prompt" data-compartment="2">+toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="IPrompt">
+<g fill="lightblue" stroke="#33322E" data-name="IPrompt">
+<rect x="384.0" y="487.5" height="72.0" width="153.0" data-name="IPrompt"></rect>
+<path d="M384.0 519.5 L537.0 519.5" fill="none" data-name="IPrompt"></path>
+<path d="M384.0 527.5 L537.0 527.5" fill="none" data-name="IPrompt"></path>
+</g>
+<g transform="translate(384, 487.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPrompt" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IPrompt" data-compartment="0">
+<a id="src\solution\interfaces\IPrompt.ts.IPrompt" xlink:href="src\solution\interfaces\IPrompt.ts"><text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="IPrompt" data-compartment="0">IPrompt</text></a>
+
+</g>
+</g>
+<g transform="translate(384, 519.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPrompt" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IPrompt" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(384, 527.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPrompt" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IPrompt" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="IPrompt" data-compartment="2">+toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="PromptManager">
+<g fill="#eee8d5" stroke="#33322E" data-name="PromptManager">
+<rect x="326.5" y="177.0" height="177.0" width="268.0" data-name="PromptManager"></rect>
+<path d="M326.5 209.0 L594.5 209.0" fill="none" data-name="PromptManager"></path>
+<path d="M326.5 257.0 L594.5 257.0" fill="none" data-name="PromptManager"></path>
+</g>
+<g transform="translate(326.5, 177)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PromptManager" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PromptManager" data-compartment="0">
+<a id="src\solution\classes\PromptManager.ts.PromptManager" xlink:href="src\solution\classes\PromptManager.ts"><text x="126.0" y="14.1" stroke="none" text-anchor="middle" data-name="PromptManager" data-compartment="0">PromptManager</text></a>
+
+</g>
+</g>
+<g transform="translate(326.5, 209)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptManager" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PromptManager" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="PromptManager" data-compartment="1">#_prompts: IPrompt[]</text>
+<text x="0.0" y="30.3" stroke="none" data-name="PromptManager" data-compartment="1">#_sortOrder: SortOrder</text>
+
+</g>
+</g>
+<g transform="translate(326.5, 257)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptManager" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PromptManager" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="PromptManager" data-compartment="2">+sortPrompts(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="PromptManager" data-compartment="2">+addPrompt(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="PromptManager" data-compartment="2">+removePrompt(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="PromptManager" data-compartment="2">+removePromptById(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="PromptManager" data-compartment="2">+getFilteredPrompts(): IPrompt[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="IPromptManager">
+<g fill="lightblue" stroke="#33322E" data-name="IPromptManager">
+<rect x="481.5" y="0.0" height="137.0" width="268.0" data-name="IPromptManager"></rect>
+<path d="M481.5 32.0 L749.5 32.0" fill="none" data-name="IPromptManager"></path>
+<path d="M481.5 40.0 L749.5 40.0" fill="none" data-name="IPromptManager"></path>
+</g>
+<g transform="translate(481.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPromptManager" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IPromptManager" data-compartment="0">
+<a id="src\solution\interfaces\IPromptManager.ts.IPromptManager" xlink:href="src\solution\interfaces\IPromptManager.ts"><text x="126.0" y="14.1" stroke="none" text-anchor="middle" data-name="IPromptManager" data-compartment="0">IPromptManager</text></a>
+
+</g>
+</g>
+<g transform="translate(481.5, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPromptManager" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IPromptManager" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(481.5, 40)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPromptManager" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IPromptManager" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="IPromptManager" data-compartment="2">+sortPrompts(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="IPromptManager" data-compartment="2">+addPrompt(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="IPromptManager" data-compartment="2">+removePrompt(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="IPromptManager" data-compartment="2">+removePromptById(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="IPromptManager" data-compartment="2">+getFilteredPrompts(): IPrompt[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="PromptStorageService">
+<g fill="#eee8d5" stroke="#33322E" data-name="PromptStorageService">
+<rect x="0.0" y="394.0" height="259.0" width="344.0" data-name="PromptStorageService"></rect>
+<path d="M0.0 426.0 L344.0 426.0" fill="none" data-name="PromptStorageService"></path>
+<path d="M0.0 491.0 L344.0 491.0" fill="none" data-name="PromptStorageService"></path>
+</g>
+<g transform="translate(0, 394)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PromptStorageService" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PromptStorageService" data-compartment="0">
+<a id="src\solution\classes\PromptStorageService.ts.PromptStorageService" xlink:href="src\solution\classes\PromptStorageService.ts"><text x="164.0" y="14.1" stroke="none" text-anchor="middle" data-name="PromptStorageService" data-compartment="0">PromptStorageService</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 426)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptStorageService" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PromptStorageService" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="PromptStorageService" data-compartment="1">#_prompts: ITextPrompt[]</text>
+<text x="0.0" y="30.3" stroke="none" data-name="PromptStorageService" data-compartment="1">#_sortOrder: SortOrder</text>
+<text x="0.0" y="46.5" stroke="none" data-name="PromptStorageService" data-compartment="1">-STORAGE_KEY: &quot;promptStorageService&quot;</text>
+
+</g>
+</g>
+<g transform="translate(0, 491)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PromptStorageService" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PromptStorageService" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="PromptStorageService" data-compartment="2">-loadFromStorage(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="PromptStorageService" data-compartment="2">-saveToStorage(): void</text>
+<text x="0.0" y="46.5" stroke="none" data-name="PromptStorageService" data-compartment="2">+sortPrompts(): void</text>
+<text x="0.0" y="62.7" stroke="none" data-name="PromptStorageService" data-compartment="2">+addPrompt(): void</text>
+<text x="0.0" y="78.9" stroke="none" data-name="PromptStorageService" data-compartment="2">+removePrompt(): void</text>
+<text x="0.0" y="95.1" stroke="none" data-name="PromptStorageService" data-compartment="2">+removePromptById(): void</text>
+<text x="0.0" y="111.3" stroke="none" data-name="PromptStorageService" data-compartment="2">+getFilteredPrompts(): ITextPrompt[]</text>
+<text x="0.0" y="127.5" stroke="none" data-name="PromptStorageService" data-compartment="2">+searchPrompts(): ITextPrompt[]</text>
+<text x="0.0" y="143.7" stroke="none" data-name="PromptStorageService" data-compartment="2">+clearPrompts(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="ITextPromptManager">
+<g fill="lightblue" stroke="#33322E" data-name="ITextPromptManager">
+<rect x="634.5" y="229.5" height="72.0" width="272.0" data-name="ITextPromptManager"></rect>
+<path d="M634.5 261.5 L906.5 261.5" fill="none" data-name="ITextPromptManager"></path>
+<path d="M634.5 269.5 L906.5 269.5" fill="none" data-name="ITextPromptManager"></path>
+</g>
+<g transform="translate(634.5, 229.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ITextPromptManager" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITextPromptManager" data-compartment="0">
+<a id="src\solution\interfaces\ITextPromptManager.ts.ITextPromptManager" xlink:href="src\solution\interfaces\ITextPromptManager.ts"><text x="128.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITextPromptManager" data-compartment="0">ITextPromptManager</text></a>
+
+</g>
+</g>
+<g transform="translate(634.5, 261.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ITextPromptManager" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ITextPromptManager" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(634.5, 269.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ITextPromptManager" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ITextPromptManager" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="ITextPromptManager" data-compartment="2">+searchPrompts(): ITextPrompt[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="ITextPrompt">
+<g fill="lightblue" stroke="#33322E" data-name="ITextPrompt">
+<rect x="666.0" y="757.5" height="48.0" width="111.0" data-name="ITextPrompt"></rect>
+<path d="M666.0 789.5 L777.0 789.5" fill="none" data-name="ITextPrompt"></path>
+<path d="M666.0 797.5 L777.0 797.5" fill="none" data-name="ITextPrompt"></path>
+</g>
+<g transform="translate(666, 757.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ITextPrompt" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITextPrompt" data-compartment="0">
+<a id="src\solution\interfaces\ITextPrompt.ts.ITextPrompt" xlink:href="src\solution\interfaces\ITextPrompt.ts"><text x="47.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITextPrompt" data-compartment="0">ITextPrompt</text></a>
+
+</g>
+</g>
+<g transform="translate(666, 789.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ITextPrompt" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ITextPrompt" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(666, 797.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ITextPrompt" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ITextPrompt" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TextPromptManager">
+<g fill="#eee8d5" stroke="#33322E" data-name="TextPromptManager">
+<rect x="654.5" y="475.5" height="96.0" width="272.0" data-name="TextPromptManager"></rect>
+<path d="M654.5 507.5 L926.5 507.5" fill="none" data-name="TextPromptManager"></path>
+<path d="M654.5 539.5 L926.5 539.5" fill="none" data-name="TextPromptManager"></path>
+</g>
+<g transform="translate(654.5, 475.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TextPromptManager" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TextPromptManager" data-compartment="0">
+<a id="src\solution\classes\TextPromptManager.ts.TextPromptManager" xlink:href="src\solution\classes\TextPromptManager.ts"><text x="128.0" y="14.1" stroke="none" text-anchor="middle" data-name="TextPromptManager" data-compartment="0">TextPromptManager</text></a>
+
+</g>
+</g>
+<g transform="translate(654.5, 507.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TextPromptManager" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TextPromptManager" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TextPromptManager" data-compartment="1">#_prompts: ITextPrompt[]</text>
+
+</g>
+</g>
+<g transform="translate(654.5, 539.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TextPromptManager" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TextPromptManager" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="TextPromptManager" data-compartment="2">+searchPrompts(): ITextPrompt[]</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
