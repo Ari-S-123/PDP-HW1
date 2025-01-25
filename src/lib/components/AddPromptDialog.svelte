@@ -5,21 +5,19 @@
   import { Label } from "$lib/components/ui/label/index.js";
   import { getContext } from "svelte";
   import type PromptStorageService from "../../solution/classes/PromptStorageService";
-  import { PromptResult } from "../../solution/enums";
-  import type IPrompt from "../../solution/interfaces/IPrompt";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
   import MultiModalPrompt from "../../solution/classes/MultiModalPrompt";
-  import TextPrompt from "../../solution/classes/TextPrompt";
   import { Trash } from "lucide-svelte/icons";
   import { nanoid } from "nanoid";
   import Attachment from "../../solution/classes/Attachment";
   import { Plus } from "lucide-svelte";
   import { toast } from "svelte-sonner";
+  import type ITextPrompt from "../../solution/interfaces/ITextPrompt";
+  import TextPrompt from "../../solution/classes/TextPrompt";
 
   const storageService: PromptStorageService = getContext("storageService");
 
   interface AddPromptDialogProps {
-    prompts: IPrompt[];
+    prompts: ITextPrompt[];
   }
 
   let { prompts = $bindable() }: AddPromptDialogProps = $props();
@@ -29,21 +27,25 @@
   let version = $state("o1-2024-12-17");
   let type = $state("Text-to-Text");
   let date = $state(new Date().toISOString().split("T")[0]);
-  let result = $state("Success");
+  let result = $state("Successful");
   let input = $state("hello");
   let output = $state("hi");
-  let formAttachments: parsedAttachment[] = $state([]);
+  let formInputAttachments: parsedAttachment[] = $state([]);
+  let formOutputAttachments: parsedAttachment[] = $state([]);
   let dialogIsOpen = $state(false);
-  let attachmentInput = $state(""); // For the new attachment input
+  let inputAttachmentText = $state(""); // For the new input attachment text
+  let outputAttachmentText = $state(""); // For the new output attachment text
 
   // Error messages
   let modelError = $state("");
   let versionError = $state("");
   let typeError = $state("");
   let dateError = $state("");
+  let resultError = $state("");
   let inputError = $state("");
   let outputError = $state("");
-  let attachmentsError = $state("");
+  let inputAttachmentsError = $state("");
+  let outputAttachmentsError = $state("");
 
   interface parsedAttachment {
     id: string;
@@ -51,7 +53,7 @@
     filename: string;
   }
 
-  function parseAttachment(input: string): parsedAttachment | undefined {
+  function parseAttachment(input: string, isInput: boolean): parsedAttachment | undefined {
     try {
       const typeMatch = input.match(/type:\s*([^,]+)/);
       const filenameMatch = input.match(/filename:\s*([^,]+)/);
@@ -66,24 +68,40 @@
         filename: filenameMatch[1].trim()
       };
     } catch (error) {
-      attachmentsError = error + ""; // kinda dirty
+      if (isInput)
+        inputAttachmentsError = error + ""; // kinda dirty
+      else outputAttachmentsError = error + ""; // kinda dirty
       return undefined;
     }
   }
 
-  function addAttachment() {
-    if (!attachmentInput) return;
-
-    const newAttachment = parseAttachment(attachmentInput);
+  function addInputAttachment() {
+    if (!inputAttachmentText) return;
+    const newAttachment = parseAttachment(inputAttachmentText, true);
     if (newAttachment) {
-      formAttachments = [...formAttachments, newAttachment];
-      attachmentInput = ""; // Clear input after successful add
-      attachmentsError = "";
+      formInputAttachments = [...formInputAttachments, newAttachment];
+      inputAttachmentText = ""; // Clear text after successful add
+      inputAttachmentsError = "";
+    } else {
+      inputAttachmentsError = 'Invalid format, Please strictly follow "type: abc, filename: xyz"';
     }
   }
 
-  function removeAttachment(id: string) {
-    formAttachments = formAttachments.filter((a) => a.id !== id);
+  function addOutputAttachment() {
+    if (!outputAttachmentText) return;
+    const newAttachment = parseAttachment(outputAttachmentText, false);
+    if (newAttachment) {
+      formOutputAttachments = [...formOutputAttachments, newAttachment];
+      outputAttachmentText = ""; // Clear text after successful add
+      outputAttachmentsError = "";
+    } else {
+      outputAttachmentsError = 'Invalid format, Please strictly follow "type: abc, filename: xyz"';
+    }
+  }
+
+  function removeAttachment(id: string, isInput: boolean) {
+    if (isInput) formInputAttachments = formInputAttachments.filter((a) => a.id !== id);
+    else formOutputAttachments = formOutputAttachments.filter((a) => a.id !== id);
   }
 
   function validateForm() {
@@ -94,9 +112,11 @@
     versionError = "";
     typeError = "";
     dateError = "";
+    resultError = "";
     inputError = "";
     outputError = "";
-    attachmentsError = "";
+    inputAttachmentsError = "";
+    outputAttachmentsError = "";
 
     if (!model.trim()) {
       modelError = "Model is required";
@@ -114,6 +134,10 @@
       dateError = "Date is required";
       isValid = false;
     }
+    if (!result.trim()) {
+      resultError = "Result is required";
+      isValid = false;
+    }
     if (!input.trim()) {
       inputError = "Input is required";
       isValid = false;
@@ -122,7 +146,6 @@
       outputError = "Output is required";
       isValid = false;
     }
-
     return isValid;
   }
 
@@ -130,30 +153,21 @@
     if (!validateForm()) {
       return;
     }
-
-    let newPrompt: IPrompt;
-
-    if (formAttachments.length > 0) {
+    let newPrompt: ITextPrompt;
+    if (formInputAttachments.length > 0 || formOutputAttachments.length > 0) {
       newPrompt = new MultiModalPrompt(
         model,
         version,
         type,
         new Date(date),
-        result as PromptResult,
+        result,
         input,
         output,
-        formAttachments.map((a) => new Attachment(a.type, a.filename))
+        formInputAttachments.map((a) => new Attachment(a.type, a.filename)),
+        formOutputAttachments.map((a) => new Attachment(a.type, a.filename))
       );
     } else {
-      newPrompt = new TextPrompt(
-        model,
-        version,
-        type,
-        new Date(date),
-        result as PromptResult,
-        input,
-        output
-      );
+      newPrompt = new TextPrompt(model, version, type, new Date(date), result, input, output);
     }
     storageService.addPrompt(newPrompt);
     prompts = storageService.prompts;
@@ -169,7 +183,7 @@
     <Dialog.Trigger class={buttonVariants({ variant: "default" })}>Add Prompt</Dialog.Trigger>
 
     <Dialog.Content>
-      <Dialog.Header>
+      <Dialog.Header class="flex items-center justify-center">
         <Dialog.Title>Add Prompt</Dialog.Title>
         <Dialog.Description>Fill in the prompt details below.</Dialog.Description>
       </Dialog.Header>
@@ -206,7 +220,12 @@
         <div class="grid grid-cols-4 items-center gap-4">
           <Label for="date" class="text-right">Date</Label>
           <!-- You can do type="date" or you can swap to a DatePicker component -->
-          <Input id="date" type="date" bind:value={date} class="col-span-3" />
+          <Input
+            id="date"
+            type="date"
+            bind:value={date}
+            class="relative col-span-3 m-auto block cursor-pointer text-center"
+          />
           {#if dateError}
             <span class="col-span-4 text-red-500">{dateError}</span>
           {/if}
@@ -214,24 +233,11 @@
 
         <!-- Result field -->
         <div class="grid grid-cols-4 items-center gap-4">
-          <Label class="text-right">Result</Label>
-          <div class="col-span-3">
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger class={buttonVariants({ variant: "outline", class: "w-full" })}>
-                Result
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content class="max-w-[16rem] min-w-[8rem]">
-                <DropdownMenu.Group>
-                  <DropdownMenu.GroupHeading>Result</DropdownMenu.GroupHeading>
-                  <DropdownMenu.Separator />
-                  <DropdownMenu.RadioGroup bind:value={result}>
-                    <DropdownMenu.RadioItem value="Success">Success</DropdownMenu.RadioItem>
-                    <DropdownMenu.RadioItem value="Failure">Failure</DropdownMenu.RadioItem>
-                  </DropdownMenu.RadioGroup>
-                </DropdownMenu.Group>
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
-          </div>
+          <Label for="result" class="text-right">Result</Label>
+          <Input id="result" bind:value={result} class="col-span-3" />
+          {#if resultError}
+            <span class="col-span-4 text-red-500">{resultError}</span>
+          {/if}
         </div>
 
         <!-- Input field -->
@@ -252,19 +258,19 @@
           {/if}
         </div>
 
-        <!-- Display existing attachments -->
-        {#each formAttachments as formAttachment (formAttachment.id)}
+        <!-- Display existing input attachments -->
+        {#each formInputAttachments as formInputAttachment (formInputAttachment.id)}
           <div class="grid grid-cols-4 items-center gap-4">
-            <Label class="text-right">Attachment</Label>
+            <Label class="text-right">Input Attachments</Label>
             <div class="col-span-2 flex items-center gap-2">
-              <span>Type: {formAttachment.type}</span>
-              <span>Filename: {formAttachment.filename}</span>
+              <span>Type: {formInputAttachment.type}</span>
+              <span>Filename: {formInputAttachment.filename}</span>
             </div>
             <Button
               variant="destructive"
               size="icon"
-              aria-label="Remove attachment"
-              onclick={() => removeAttachment(formAttachment.id)}
+              aria-label="Remove input attachment"
+              onclick={() => removeAttachment(formInputAttachment.id, true)}
               class="justify-self-start"
             >
               <Trash class="h-4 w-4" />
@@ -272,26 +278,75 @@
           </div>
         {/each}
 
-        <!-- Add new attachment -->
+        <!-- Add new input attachment -->
         <div class="grid grid-cols-4 items-center gap-4">
-          <Label for="attachments" class="text-right">Attachments</Label>
+          <Label for="input attachments" class="text-right">Input Attachments</Label>
           <div class="col-span-3 flex gap-2">
             <Input
-              id="attachments"
-              bind:value={attachmentInput}
+              id="input attachments"
+              bind:value={inputAttachmentText}
               placeholder="type: abc, filename: xyz"
+              onkeypress={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  addInputAttachment();
+                }
+              }}
             />
-            <Button size="icon" onclick={addAttachment}>
+            <Button size="icon" disabled={!inputAttachmentText} onclick={addInputAttachment}>
               <Plus class="h-4 w-4" />
             </Button>
           </div>
-          {#if attachmentsError}
-            <span class="col-span-4 text-center text-red-500">{attachmentsError}</span>
+          {#if inputAttachmentsError}
+            <span class="col-span-4 text-center text-red-500">{inputAttachmentsError}</span>
+          {/if}
+        </div>
+
+        <!-- Display existing output attachments -->
+        {#each formOutputAttachments as formOutputAttachment (formOutputAttachment.id)}
+          <div class="grid grid-cols-4 items-center gap-4">
+            <Label class="text-right">Output Attachment</Label>
+            <div class="col-span-2 flex items-center gap-2">
+              <span>Type: {formOutputAttachment.type}</span>
+              <span>Filename: {formOutputAttachment.filename}</span>
+            </div>
+            <Button
+              variant="destructive"
+              size="icon"
+              aria-label="Remove output attachment"
+              onclick={() => removeAttachment(formOutputAttachment.id, false)}
+              class="justify-self-start"
+            >
+              <Trash class="h-4 w-4" />
+            </Button>
+          </div>
+        {/each}
+
+        <!-- Add new output attachment -->
+        <div class="grid grid-cols-4 items-center gap-4">
+          <Label for="output attachments" class="text-right">Output Attachments</Label>
+          <div class="col-span-3 flex gap-2">
+            <Input
+              id="output attachments"
+              bind:value={outputAttachmentText}
+              placeholder="type: abc, filename: xyz"
+              onkeypress={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  addOutputAttachment();
+                }
+              }}
+            />
+            <Button size="icon" disabled={!outputAttachmentText} onclick={addOutputAttachment}>
+              <Plus class="h-4 w-4" />
+            </Button>
+          </div>
+          {#if outputAttachmentsError}
+            <span class="col-span-4 text-center text-red-500">{outputAttachmentsError}</span>
           {/if}
         </div>
       </div>
-
-      <Dialog.Footer>
+      <Dialog.Footer class="m-auto">
         <Button type="submit" onclick={addPrompt}>Add Prompt</Button>
       </Dialog.Footer>
     </Dialog.Content>

@@ -1,7 +1,6 @@
 import TextPrompt from "./TextPrompt";
 import type IMultiModalPrompt from "../interfaces/IMultiModalPrompt";
 import type IAttachment from "../interfaces/IAttachment";
-import { PromptResult } from "../enums";
 
 /**
  * @class Implementing the duties of a multimodal prompt.
@@ -16,7 +15,7 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * @param {string} version The version of the model used.
    * @param {string} type The type of prompt.
    * @param {Date} date The date the prompt was created.
-   * @param {PromptResult} result The result of the prompt.
+   * @param {string} result The result of the prompt.
    * @param {string} input The input text of the prompt.
    * @param {string} output The output text of the prompt.
    * @param {IAttachment[]} inputAttachments The input attachments of the prompt.
@@ -27,7 +26,7 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
     version: string = "Sonnet 3.5",
     type: string = "Multimodal",
     date: Date = new Date(),
-    result: PromptResult = PromptResult.Success,
+    result: string = "Successful",
     input: string = "Please translate Eng-to-French: 'Hello, world!'",
     output: string = "Bonjour, le monde!",
     inputAttachments: IAttachment[] = [],

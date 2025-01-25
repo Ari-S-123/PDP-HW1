@@ -13,7 +13,7 @@ export default class TextPromptManager extends PromptManager implements ITextPro
    * @param {string} searchTerm The search term to look for.
    * @returns {ITextPrompt[]} The text prompts that contain the search term.
    */
-  searchPrompts(searchTerm: string): ITextPrompt[] {
+  public searchPrompts(searchTerm: string): ITextPrompt[] {
     return this._prompts.filter((prompt) =>
       Object.values(prompt).some((value) =>
         value.toString().toLowerCase().trim().includes(searchTerm.toLowerCase().trim())

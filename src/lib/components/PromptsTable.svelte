@@ -3,15 +3,15 @@
   import { Button } from "$lib/components/ui/button";
   import { Trash } from "lucide-svelte/icons";
   import Trash2 from "lucide-svelte/icons/trash-2";
-  import type IPrompt from "../../solution/interfaces/IPrompt";
   import { getContext } from "svelte";
   import type PromptStorageService from "../../solution/classes/PromptStorageService";
   import { toast } from "svelte-sonner";
+  import type ITextPrompt from "../../solution/interfaces/ITextPrompt";
 
   const storageService: PromptStorageService = getContext("storageService");
 
   interface PromptsTableProps {
-    prompts: IPrompt[];
+    prompts: ITextPrompt[];
   }
 
   let { prompts }: PromptsTableProps = $props();
@@ -51,7 +51,8 @@
           <Table.Head>Type</Table.Head>
           <Table.Head>Input</Table.Head>
           <Table.Head>Output</Table.Head>
-          <Table.Head>Attachments</Table.Head>
+          <Table.Head>Input Attachments</Table.Head>
+          <Table.Head>Output Attachments</Table.Head>
           <Table.Head>Remove</Table.Head>
         </Table.Row>
       </Table.Header>
@@ -75,8 +76,15 @@
               {prompt._output || "N/A"}
             </Table.Cell>
             <Table.Cell>
-              {#if prompt._attachments}
-                {prompt._attachments.map((a) => a._payload).join(", ")}
+              {#if prompt._inputAttachments}
+                {prompt._inputAttachments.map((a) => a._payload).join(", ")}
+              {:else}
+                N/A
+              {/if}
+            </Table.Cell>
+            <Table.Cell>
+              {#if prompt._outputAttachments}
+                {prompt._outputAttachments.map((a) => a._payload).join(", ")}
               {:else}
                 N/A
               {/if}

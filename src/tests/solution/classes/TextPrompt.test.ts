@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { DUMMY_TEXT_PROMPT_1 } from "../../test-dummies/prompts";
 import TextPrompt from "../../../solution/classes/TextPrompt";
-import { PromptResult } from "../../../solution/enums";
 
 describe("TextPrompt Test Suite", () => {
   let testTextPrompt: TextPrompt;
@@ -23,24 +22,16 @@ describe("TextPrompt Test Suite", () => {
     expect(defaultTextPrompt.id).toBeTruthy();
     expect(defaultTextPrompt.model).toBe("Claude");
     expect(defaultTextPrompt.version).toBe("Sonnet 3.5");
-    expect(defaultTextPrompt.result).toBe("Success");
+    expect(defaultTextPrompt.result).toBe("Successful");
     expect(defaultTextPrompt.type).toBe("Text-to-Text");
     expect(defaultTextPrompt.input).toBe("Please translate Eng-to-French: 'Hello, world!'");
     expect(defaultTextPrompt.output).toBe("Bonjour, le monde!");
   });
 
   it("should throw errors for invalid input into constructor", () => {
-    // Invalid prompt should not be possible because of the enum, output can be empty
+    // Output can be empty
     expect(() => {
-      new TextPrompt(
-        "",
-        "",
-        "",
-        new Date("invalid"),
-        DUMMY_TEXT_PROMPT_1.result,
-        "",
-        DUMMY_TEXT_PROMPT_1.output
-      );
+      new TextPrompt("", "", "", new Date("invalid"), "", "", DUMMY_TEXT_PROMPT_1.output);
     }).toThrowError("Invalid prompt model");
     expect(() => {
       new TextPrompt(
@@ -77,6 +68,18 @@ describe("TextPrompt Test Suite", () => {
         DUMMY_TEXT_PROMPT_1.output
       );
     }).toThrowError("Invalid prompt date");
+
+    expect(() => {
+      new TextPrompt(
+        DUMMY_TEXT_PROMPT_1.model,
+        DUMMY_TEXT_PROMPT_1.version,
+        DUMMY_TEXT_PROMPT_1.type,
+        DUMMY_TEXT_PROMPT_1.date,
+        "",
+        DUMMY_TEXT_PROMPT_1.input,
+        DUMMY_TEXT_PROMPT_1.output
+      );
+    }).toThrowError("Invalid prompt result");
 
     expect(() => {
       new TextPrompt(
@@ -115,7 +118,7 @@ describe("TextPrompt Test Suite", () => {
     testTextPrompt.version = newVersion;
     expect(testTextPrompt.version).toBe(newVersion);
 
-    const newResult = PromptResult.Failure;
+    const newResult = "Failed";
     testTextPrompt.result = newResult;
     expect(testTextPrompt.result).toBe(newResult);
 
@@ -140,6 +143,10 @@ describe("TextPrompt Test Suite", () => {
     expect(() => {
       testTextPrompt.version = "";
     }).toThrowError("Invalid prompt version");
+
+    expect(() => {
+      testTextPrompt.result = "";
+    }).toThrowError("Invalid prompt result");
 
     expect(() => {
       testTextPrompt.input = "";

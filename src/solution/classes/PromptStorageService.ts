@@ -1,16 +1,16 @@
-import type IPromptManager from "../interfaces/IPromptManager";
-import type IPrompt from "../interfaces/IPrompt";
 import { SortOrder } from "../enums";
 import type { PromptFilters, SortOn } from "../types";
 import { browser } from "$app/environment";
+import type ITextPromptManager from "../interfaces/ITextPromptManager";
+import type ITextPrompt from "../interfaces/ITextPrompt";
 
 /**
- * @class Implementing the duties of a prompt manager using the localStorage API.
+ * @class Implementing the duties of a text prompt manager using the localStorage API.
  * I didn't write the tests for this class because I would have to mock the localStorage API.
  * This is the "creative addition" for the rubric.
  */
-export default class PromptStorageService implements IPromptManager {
-  protected _prompts: IPrompt[] = [];
+export default class PromptStorageService implements ITextPromptManager {
+  protected _prompts: ITextPrompt[] = [];
   protected _sortOrder: SortOrder = SortOrder.Ascending;
   private readonly STORAGE_KEY = "promptStorageService";
 
@@ -52,10 +52,10 @@ export default class PromptStorageService implements IPromptManager {
   }
 
   /**
-   * Gets the prompts stored in the localStorage.
-   * @returns {IPrompt[]} The prompts stored in the localStorage.
+   * Gets the text prompts stored in the localStorage.
+   * @returns {ITextPrompt[]} The text prompts stored in the localStorage.
    */
-  public get prompts(): IPrompt[] {
+  public get prompts(): ITextPrompt[] {
     return this._prompts;
   }
 
@@ -94,26 +94,26 @@ export default class PromptStorageService implements IPromptManager {
   }
 
   /**
-   * Adds a prompt to the prompt manager.
-   * @param {IPrompt} prompt The prompt to add.
+   * Adds a text prompt to the prompt manager.
+   * @param {ITextPrompt} prompt The text prompt to add.
    */
-  public addPrompt(prompt: IPrompt): void {
+  public addPrompt(prompt: ITextPrompt): void {
     this._prompts.push(prompt);
     this.saveToStorage();
   }
 
   /**
-   * Removes a prompt from the prompt manager.
-   * @param {IPrompt} prompt The prompt to remove.
+   * Removes a text prompt from the prompt manager.
+   * @param {ITextPrompt} prompt The text prompt to remove.
    */
-  public removePrompt(prompt: IPrompt): void {
+  public removePrompt(prompt: ITextPrompt): void {
     this._prompts = this._prompts.filter((p) => p !== prompt);
     this.saveToStorage();
   }
 
   /**
-   * Removes a prompt from the prompt manager by id.
-   * @param {string} id The id of the prompt to remove.
+   * Removes a text prompt from the prompt manager by id.
+   * @param {string} id The id of the text prompt to remove.
    */
   public removePromptById(id: string): void {
     this._prompts = this._prompts.filter((p) => {
@@ -125,11 +125,11 @@ export default class PromptStorageService implements IPromptManager {
   }
 
   /**
-   * Gets the filtered prompts of the prompt manager.
+   * Gets the filtered text prompts of the prompt manager.
    * @param {PromptFilters} filters The filters to apply.
-   * @returns {IPrompt[]} The filtered prompts of the prompt manager.
+   * @returns {ITextPrompt[]} The filtered text prompts of the prompt manager.
    */
-  public getFilteredPrompts(filters: PromptFilters): IPrompt[] {
+  public getFilteredPrompts(filters: PromptFilters): ITextPrompt[] {
     return this._prompts.filter((prompt) => {
       return (
         (!filters.model || prompt.model === filters.model) &&
@@ -138,6 +138,19 @@ export default class PromptStorageService implements IPromptManager {
         (!filters.result || prompt.result === filters.result)
       );
     });
+  }
+
+  /**
+   * Gets text prompts that contain the search term.
+   * @param {string} searchTerm The search term to look for.
+   * @returns {ITextPrompt[]} The text prompts that contain the search term.
+   */
+  public searchPrompts(searchTerm: string): ITextPrompt[] {
+    return this._prompts.filter((prompt) =>
+      Object.values(prompt).some((value) =>
+        value.toString().toLowerCase().trim().includes(searchTerm.toLowerCase().trim())
+      )
+    );
   }
 
   /**

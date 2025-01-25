@@ -1,6 +1,5 @@
 import Prompt from "./Prompt";
 import type ITextPrompt from "../interfaces/ITextPrompt";
-import { PromptResult } from "../enums";
 
 /**
  * @class Implementing the duties of a text prompt.
@@ -15,7 +14,7 @@ export default class TextPrompt extends Prompt implements ITextPrompt {
    * @param {string} version The version of the model used.
    * @param {string} type The type of prompt.
    * @param {Date} date The date the prompt was created.
-   * @param {PromptResult} result The result of the prompt.
+   * @param {string} result The result of the prompt.
    * @param {string} input The input text of the prompt.
    * @param {string} output The output text of the prompt.
    */
@@ -24,7 +23,7 @@ export default class TextPrompt extends Prompt implements ITextPrompt {
     version: string = "Sonnet 3.5",
     type: string = "Text-to-Text",
     date: Date = new Date(),
-    result: PromptResult = PromptResult.Success,
+    result: string = "Successful",
     input: string = "Please translate Eng-to-French: 'Hello, world!'",
     output: string = "Bonjour, le monde!"
   ) {
