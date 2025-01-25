@@ -20,9 +20,8 @@ file in src/tests/solution/.
 
 ## TODO
 
-- [ ] Update IPromptManager and all its users to include a text search on the inputted prompt on getFilteredPrompts.
-- [ ] Refactor the PromptsTable component in the frontend to a proper PromptsDataTable component with built-in sorting
-      and filtering.
+- [x] Update IPromptManager and all its users to include a text search on the inputted prompt on getFilteredPrompts.
+- [x] Implement a search bar in the UI to filter prompts by text on all fields.
 
 ## Screenshots
 
