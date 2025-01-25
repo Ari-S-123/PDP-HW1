@@ -1,3 +1,5 @@
+# [Generative AI Prompt Manager](https://ari-s-123.github.io/PDP-HW1)
+
 ## About
 
 This is a webapp made with SvelteKit and OOP that helps you keep tracks of you generative AI prompts. You can see a of
