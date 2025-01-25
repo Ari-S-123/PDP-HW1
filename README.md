@@ -25,10 +25,12 @@ file in src/tests/solution/.
 
 ## Screenshots
 
-![Screenshot 2025-01-23 190326](https://github.com/user-attachments/assets/4916710a-1def-492c-b1e4-11a31f518edc)
-![Screenshot 2025-01-23 190359](https://github.com/user-attachments/assets/402b6fac-aa9d-464e-a66e-c22dfac55acf)
-![Screenshot 2025-01-23 190341](https://github.com/user-attachments/assets/ff28d940-7a2c-4c75-b718-fec456aa7bcd)
-![Screenshot 2025-01-23 190409](https://github.com/user-attachments/assets/0c9248bc-ae96-4bf2-815f-d8692e576e0d)
+![Screenshot 2025-01-25 124814](https://github.com/user-attachments/assets/b1006a7a-2fba-4b18-be21-276fec6a4869)
+![Screenshot 2025-01-25 124830](https://github.com/user-attachments/assets/c41eb796-e5c5-44da-80f0-05af9f5c2a24)
+![Screenshot 2025-01-25 125448](https://github.com/user-attachments/assets/31e3750a-78a7-4cb6-bd44-bfca753dd078)
+![Screenshot 2025-01-25 125503](https://github.com/user-attachments/assets/f8d6072a-9592-4849-83ae-88132c723c41)
+![Screenshot 2025-01-25 125520](https://github.com/user-attachments/assets/61045ea6-437b-481d-ba9c-e450e10732c5)
+![Screenshot 2025-01-25 125544](https://github.com/user-attachments/assets/048108b6-d8cb-4651-b3ba-4a3739240329)
 
 ## Setup
 
