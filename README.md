@@ -25,6 +25,10 @@ file in src/tests/solution/.
 - [x] Update IPromptManager and all its users to include a text search on the inputted prompt on getFilteredPrompts.
 - [x] Implement a search bar in the UI to filter prompts by text on all fields.
 
+## UML Diagram
+
+![UML Diagram](https://github.com/user-attachments/assets/d2caadb0-3bef-4059-ba6d-8eaef22bfaf8)
+
 ## Screenshots
 
 ![Screenshot 2025-01-25 124814](https://github.com/user-attachments/assets/b1006a7a-2fba-4b18-be21-276fec6a4869)
