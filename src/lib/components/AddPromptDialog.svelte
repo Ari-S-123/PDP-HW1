@@ -178,7 +178,7 @@
   }
 </script>
 
-<div aria-label="This dialog lets add a prompt to your list">
+<div aria-label="This dialog lets add a prompt to your list" class="m-2">
   <Dialog.Root bind:open={dialogIsOpen}>
     <Dialog.Trigger class={buttonVariants({ variant: "default" })}>Add Prompt</Dialog.Trigger>
 

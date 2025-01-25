@@ -15,6 +15,7 @@
   }
 
   let { prompts }: PromptsTableProps = $props();
+  $inspect(prompts);
 </script>
 
 <div
@@ -22,28 +23,11 @@
   class="flex w-full flex-col items-center justify-center"
 >
   {#if prompts.length === 0}
-    <p class="text-center text-lg font-medium">No prompts to display.</p>
+    <p class="text-center text-lg font-medium">No prompts to display</p>
   {:else}
-    {#if prompts.length > 1}
-      <Button
-        variant="destructive"
-        aria-label="Removes all prompts"
-        onclick={() => {
-          storageService.clearPrompts();
-          prompts = storageService.prompts;
-          toast.success(`All prompts removed successfully.`);
-        }}
-        class="m-2"
-      >
-        <Trash2 class="mr-2 size-4" />
-        Remove All Prompts
-      </Button>
-    {/if}
     <Table.Root>
-      <Table.Caption>Your Prompts</Table.Caption>
       <Table.Header>
         <Table.Row>
-          <Table.Head>ID</Table.Head>
           <Table.Head>Model</Table.Head>
           <Table.Head>Version</Table.Head>
           <Table.Head>Date</Table.Head>
@@ -61,7 +45,6 @@
           <Table.Row>
             <!--For some reason this works even though it shouldn't...-->
             <!--This time it's Svelte complaining instead of TypeScript but again there are no runtime errors...-->
-            <Table.Cell class="font-medium">{prompt._id}</Table.Cell>
             <Table.Cell>{prompt._model}</Table.Cell>
             <Table.Cell>{prompt._version}</Table.Cell>
             <Table.Cell>
@@ -76,37 +59,54 @@
               {prompt._output || "N/A"}
             </Table.Cell>
             <Table.Cell>
-              {#if prompt._inputAttachments}
+              {#if prompt._inputAttachments && prompt._inputAttachments.length > 0}
                 {prompt._inputAttachments.map((a) => a._payload).join(", ")}
               {:else}
                 N/A
               {/if}
             </Table.Cell>
             <Table.Cell>
-              {#if prompt._outputAttachments}
+              {#if prompt._outputAttachments && prompt._outputAttachments.length > 0}
                 {prompt._outputAttachments.map((a) => a._payload).join(", ")}
               {:else}
                 N/A
               {/if}
             </Table.Cell>
-            <Button
-              variant="destructive"
-              size="icon"
-              aria-label="Removes this prompt"
-              onclick={() => {
-                storageService.removePromptById(prompt._id);
-                prompts = storageService.prompts;
-                toast.success(
-                  `Prompt made using ${prompt._model} version ${prompt._version} dated ${new Date(prompt._date).toLocaleDateString()} removed successfully.`
-                );
-              }}
-              class="m-2"
-            >
-              <Trash class="h-6 w-6" />
-            </Button>
+            <Table.Cell>
+              <Button
+                variant="destructive"
+                size="icon"
+                aria-label="Removes this prompt"
+                onclick={() => {
+                  storageService.removePromptById(prompt._id);
+                  prompts = storageService.prompts;
+                  toast.success(
+                    `Prompt made using ${prompt._model} version ${prompt._version} dated ${new Date(prompt._date).toLocaleDateString()} removed successfully.`
+                  );
+                }}
+                class="m-2"
+              >
+                <Trash class="h-6 w-6" />
+              </Button>
+            </Table.Cell>
           </Table.Row>
         {/each}
       </Table.Body>
     </Table.Root>
+    {#if prompts.length > 1}
+      <Button
+        variant="destructive"
+        aria-label="Removes all prompts"
+        onclick={() => {
+          storageService.clearPrompts();
+          prompts = storageService.prompts;
+          toast.success(`All prompts removed successfully.`);
+        }}
+        class="my-4"
+      >
+        <Trash2 class="mr-2 size-4" />
+        Remove All Prompts
+      </Button>
+    {/if}
   {/if}
 </div>
