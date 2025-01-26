@@ -47,7 +47,7 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * Gets the input attachments of the prompt.
    * @returns {IAttachment[]} The input attachments of the prompt.
    */
-  get inputAttachments(): IAttachment[] {
+  public get inputAttachments(): IAttachment[] {
     return this._inputAttachments;
   }
 
@@ -55,7 +55,7 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * Gets the output attachments of the prompt.
    * @returns {IAttachment[]} The output attachments of the prompt.
    */
-  get outputAttachments(): IAttachment[] {
+  public get outputAttachments(): IAttachment[] {
     return this._outputAttachments;
   }
 
@@ -63,7 +63,7 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * Sets the input attachments of the prompt.
    * @param {IAttachment[]} inputAttachments The input attachments of the prompt.
    */
-  set inputAttachments(inputAttachments: IAttachment[]) {
+  public set inputAttachments(inputAttachments: IAttachment[]) {
     if (!inputAttachments) {
       throw new Error("Invalid prompt input attachments");
     }
@@ -74,7 +74,7 @@ export default class MultiModalPrompt extends TextPrompt implements IMultiModalP
    * Sets the output attachments of the prompt.
    * @param {IAttachment[]} outputAttachments The output attachments of the prompt.
    */
-  set outputAttachments(outputAttachments: IAttachment[]) {
+  public set outputAttachments(outputAttachments: IAttachment[]) {
     if (!outputAttachments) {
       throw new Error("Invalid prompt output attachments");
     }
